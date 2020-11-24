@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../index.css";
+import logo from "../images/logo192.png";
 
 const styles = {
   textDecoration: "none",
@@ -11,7 +12,12 @@ function LayoutApp({ children }) {
   return (
     <div>
       <div className="navbar">
-        <img className="logo" src="../../public/logo512.png" alt="Logo" />
+        <img
+          className="logo"
+          src={logo}
+          alt="Logo"
+          style={{ height: "2rem" }}
+        />
         <nav className="menu">
           <ul>
             <li>
