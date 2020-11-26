@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  padding: 40px 20px 20px 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -8,18 +8,28 @@ body {
 }
 
 .navbar {
-  background-color: navy;
-  color: white;
-  padding: 5px;
+  background-color: rgb(66, 164, 245);
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navbar ul {
   display: inline;
+  padding: 0;
+  margin-right: 20px;
 }
 
 .navbar li {
   display: inline;
   margin: 4px;
+}
+
+.logo {
+  margin-left: 20px;
 }
