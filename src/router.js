@@ -1,9 +1,10 @@
 import React from "react";
 import LayoutApp from "./components/LayoutApp";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Signup from "./pages/Signup";
 
 // Aquí va el Landing Page y el Signup
-const Signup = () => <h1>Signup</h1>;
+// const Signup = () => <h1>Signup</h1>;
 // Aquí va solo el Welcome Back y el form del login
 const Login = () => <h1>Login</h1>;
 // Aquí va el display de todos los projectos que tiene el ususario

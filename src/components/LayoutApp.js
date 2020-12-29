@@ -48,6 +48,7 @@ function LayoutApp({ children }) {
           </ul>
         </nav>
       </div>
+      <br />
       <div>{children}</div>
     </div>
   );
