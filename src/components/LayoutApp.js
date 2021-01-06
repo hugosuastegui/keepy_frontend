@@ -21,6 +21,11 @@ function LayoutApp({ children }) {
         <nav className="menu">
           <ul>
             <li>
+              <Link style={styles} to="/projects">
+                Projects
+              </Link>
+            </li>
+            <li>
               <Link style={styles} to="/brief">
                 Brief
               </Link>

@@ -1,13 +1,18 @@
-import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { signup } from "../services/auth";
+import React, { useState } from "react";
+import { Form, Input, Button, Typography } from "antd";
+import { login } from "../services/auth";
 
-function Signup({ history }) {
+const { Text } = Typography;
+
+function Login({ history }) {
+  const [error, setError] = useState(null);
   const [form] = Form.useForm();
 
   async function onFinish(values) {
-    await signup(values);
-    history.push("/projects");
+    await login(values).catch((err) => {
+      setError(err);
+    });
+    // history.push("/projects");
   }
 
   return (
@@ -34,21 +39,15 @@ function Signup({ history }) {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item
-        label="Repeated Password"
-        name="repeatedPassword"
-        rules={[{ required: true, message: "Please repeat your password!" }]}
-      >
-        <Input.Password />
-      </Form.Item>
+      {error && <Text type="danger">{error.message}</Text>}
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Login
         </Button>
       </Form.Item>
     </Form>
   );
 }
 
-export default Signup;
+export default Login;
