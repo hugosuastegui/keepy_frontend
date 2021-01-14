@@ -1,21 +1,29 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Typography } from "antd";
+import React, { useContext } from "react";
+import { Redirect } from "react-router-dom";
+import { Form, Input, Button, notification } from "antd";
 import { login } from "../services/auth";
-
-const { Text } = Typography;
+import { Context } from "../context";
 
 function Login({ history }) {
-  const [error, setError] = useState(null);
   const [form] = Form.useForm();
+  const { loginUser, user } = useContext(Context);
 
   async function onFinish(values) {
-    await login(values).catch((err) => {
-      setError(err);
+    const user = await login(values).catch((err) => {
+      openNotificationWithIcon(err.response.data.message);
     });
-    // history.push("/projects");
+    delete user.password;
+    loginUser(user);
   }
 
-  return (
+  const openNotificationWithIcon = (message) => {
+    notification.error({
+      message: "Bad login",
+      description: message,
+    });
+  };
+
+  return !user ? (
     <Form
       layout="vertical"
       name="basic"
@@ -39,14 +47,14 @@ function Login({ history }) {
         <Input.Password />
       </Form.Item>
 
-      {error && <Text type="danger">{error.message}</Text>}
-
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Login
         </Button>
       </Form.Item>
     </Form>
+  ) : (
+    <Redirect to="/profile" />
   );
 }
 

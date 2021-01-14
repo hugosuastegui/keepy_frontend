@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import Router from "./router";
 import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
+import CtxProvider from "./context";
 
 ReactDOM.render(
   // <React.StrictMode>
-  <Router />,
+  <CtxProvider>
+    <Router />
+  </CtxProvider>,
   // </React.StrictMode>
   document.getElementById("root")
 );

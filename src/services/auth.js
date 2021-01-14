@@ -9,6 +9,6 @@ export const signup = async (user) => {
 };
 
 export const login = async (user) => {
-  await authService.post("/login", user);
-  return true;
+  const { data } = await authService.post("/login", user);
+  return data;
 };
