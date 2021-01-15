@@ -3,12 +3,9 @@ import LayoutApp from "./components/LayoutApp";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+// User CRUD
+import Profile from "./pages/Profile";
 
-// Aquí va el Landing Page y el Signup
-// const Signup = () => <h1>Signup</h1>;
-// Aquí va solo el Welcome Back y el form del login
-// const Login = () => <h1>Login</h1>;
-// Aquí va el display de todos los projectos que tiene el ususario
 const Projects = () => <h1>Projects</h1>;
 // Aquí va todo el análisis de datos del proyecto
 const Brief = () => <h1>Brief</h1>;
@@ -16,8 +13,6 @@ const Brief = () => <h1>Brief</h1>;
 const Project = () => <h1>Edit Project</h1>;
 // Aquí va el Concept CRUD
 const Ledger = () => <h1>Ledger</h1>;
-// Aquí va el User CRUD
-const Profile = () => <h1>Profile</h1>;
 
 const router = () => (
   <Router>

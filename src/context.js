@@ -1,16 +1,39 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { getCurrentUser } from "./services/auth";
 
 export const Context = createContext();
 
-export default function CtxProvider({ children }) {
-  const [user, setUser] = useState(null);
+export default function OurProvider({ children }) {
+  const [user, setuser] = useState(null);
+
+  async function getSession() {
+    const { user } = await getCurrentUser();
+    console.log(user);
+    if (user?.email) {
+      loginUser(user);
+    }
+  }
+
+  useEffect(() => {
+    getSession();
+  }, []);
+
   function loginUser(user) {
-    setUser(user);
+    setuser(user);
   }
   function logout() {
-    setUser(null);
+    setuser(null);
   }
+
   return (
-    <CtxProvider value={(user, loginUser, logout)}>{children}</CtxProvider>
+    <Context.Provider
+      value={{
+        user,
+        loginUser,
+        logout,
+      }}
+    >
+      {children}
+    </Context.Provider>
   );
 }

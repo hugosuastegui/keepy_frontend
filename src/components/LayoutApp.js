@@ -50,6 +50,11 @@ function LayoutApp({ children }) {
                 Logout
               </Link>
             </li>
+            <li>
+              <Link style={styles} to="/profile">
+                Profile
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
