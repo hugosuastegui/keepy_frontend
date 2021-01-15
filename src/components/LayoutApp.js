@@ -4,7 +4,6 @@ import "../index.css";
 import logo from "../images/logo192.png";
 
 const styles = {
-  textDecoration: "none",
   color: "white",
 };
 
@@ -18,11 +17,37 @@ function LayoutApp({ children }) {
           alt="Logo"
           style={{ height: "2rem" }}
         />
+        <nav>
+          <ul>
+            <li>
+              <Link style={styles} to="/profile">
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link style={styles} to="/logout">
+                Logout
+              </Link>
+            </li>
+            <li>
+              <Link style={styles} to="/login">
+                Log In
+              </Link>
+            </li>
+            <li>
+              <Link style={styles} to="/signup">
+                Sign Up
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div className="sidebar">
         <nav className="menu">
           <ul>
             <li>
               <Link style={styles} to="/projects">
-                Projects
+                My Projects
               </Link>
             </li>
             <li>
@@ -33,26 +58,6 @@ function LayoutApp({ children }) {
             <li>
               <Link style={styles} to="/ledger">
                 Ledger
-              </Link>
-            </li>
-            <li>
-              <Link style={styles} to="/signup">
-                Signup
-              </Link>
-            </li>
-            <li>
-              <Link style={styles} to="/login">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link style={styles} to="/">
-                Logout
-              </Link>
-            </li>
-            <li>
-              <Link style={styles} to="/profile">
-                Profile
               </Link>
             </li>
           </ul>
