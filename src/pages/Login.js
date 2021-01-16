@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button, notification, Typography } from "antd";
 import { login } from "../services/auth";
 import { Context } from "../context";
+
+const { Title } = Typography;
 
 function Login({ history }) {
   const [form] = Form.useForm();
@@ -31,6 +33,7 @@ function Login({ history }) {
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
+      <Title>Log In</Title>
       <Form.Item
         label="Email"
         name="email"

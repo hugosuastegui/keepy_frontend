@@ -45,6 +45,7 @@ function LayoutApp({ children }) {
       <div className="sidebar">
         <nav className="menu">
           <ul>
+            <li>Project</li>
             <li>
               <Link style={styles} to="/projects">
                 My Projects
@@ -64,7 +65,7 @@ function LayoutApp({ children }) {
         </nav>
       </div>
       <br />
-      <div>{children}</div>
+      <div className="content">{children}</div>
     </div>
   );
 }

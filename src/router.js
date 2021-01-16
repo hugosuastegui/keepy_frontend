@@ -3,7 +3,6 @@ import LayoutApp from "./components/LayoutApp";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-// User CRUD
 import Profile from "./pages/Profile";
 
 const Projects = () => <h1>Projects</h1>;

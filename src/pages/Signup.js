@@ -1,6 +1,8 @@
 import React from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Typography } from "antd";
 import { signup } from "../services/auth";
+
+const { Title } = Typography;
 
 function Signup({ history }) {
   const [form] = Form.useForm();
@@ -18,6 +20,7 @@ function Signup({ history }) {
       initialValues={{ remember: true }}
       onFinish={onFinish}
     >
+      <Title>Sign Up</Title>
       <Form.Item
         label="Email"
         name="email"
