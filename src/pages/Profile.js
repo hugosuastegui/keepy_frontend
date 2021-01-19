@@ -2,6 +2,9 @@ import React, { useContext, useState, useRef } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
 import { EditOutlined, CheckOutlined } from "@ant-design/icons";
+import MY_SERVICES from "../services/index";
+
+const { updateUser } = MY_SERVICES;
 
 function Profile() {
   const { user } = useContext(Context);
@@ -11,9 +14,11 @@ function Profile() {
     setEditMode(!editMode);
     console.log("On Edit Mode");
   };
-  const updateUser = () => {
+  const editUser = async () => {
     console.log(`User updated, value: ${inputName.current.value}`);
     setEditMode(!editMode);
+    user.username = inputName.current.value;
+    await updateUser(user._id, user);
   };
   return user ? (
     <div>
@@ -23,11 +28,11 @@ function Profile() {
         <input
           ref={inputName}
           defaultValue={user.username}
-          // onBlur={(e) => updateUser(e.target.value)}
+          // onBlur={(e) => editUser(e.target.value)}
         ></input>
       )}
       {editMode ? (
-        <button onClick={() => updateUser()} style={{ margin: "5px" }}>
+        <button onClick={() => editUser()} style={{ margin: "5px" }}>
           <CheckOutlined />
         </button>
       ) : (

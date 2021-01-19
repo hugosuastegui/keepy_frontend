@@ -22,7 +22,7 @@ export const getCurrentUser = async () => {
   return user;
 };
 
-export const logoutP = async () => {
+export const logout = async () => {
   await authService.get("/logout");
 };
 
