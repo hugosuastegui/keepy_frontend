@@ -38,7 +38,7 @@ body {
   background-color: grey;
   width: 100px;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   left: 0;
   margin-top: 10px;
 }

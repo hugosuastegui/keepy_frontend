@@ -6,7 +6,7 @@ import { Context } from "../context";
 
 const { Title } = Typography;
 
-function Login({ history }) {
+function Login() {
   const [form] = Form.useForm();
   const { loginUser, user } = useContext(Context);
 
@@ -15,6 +15,7 @@ function Login({ history }) {
       openNotificationWithIcon(err.response.data.message);
     });
     delete user.password;
+    // Context
     loginUser(user);
   }
 

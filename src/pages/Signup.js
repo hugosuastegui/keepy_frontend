@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Input, Button, Typography } from "antd";
 import { signup } from "../services/auth";
+import { Redirect } from "react-router-dom";
+import { Context } from "../context";
 
 const { Title } = Typography;
 
 function Signup({ history }) {
+  const { user } = useContext(Context);
   const [form] = Form.useForm();
 
   async function onFinish(values) {
@@ -12,7 +15,7 @@ function Signup({ history }) {
     history.push("/projects");
   }
 
-  return (
+  return !user ? (
     <Form
       layout="vertical"
       name="basic"
@@ -22,9 +25,17 @@ function Signup({ history }) {
     >
       <Title>Sign Up</Title>
       <Form.Item
+        label="username"
+        name="username"
+        rules={[{ required: true, message: "Please input your username!" }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        rules={[{ required: true, message: "Please input your email!" }]}
       >
         <Input />
       </Form.Item>
@@ -51,6 +62,8 @@ function Signup({ history }) {
         </Button>
       </Form.Item>
     </Form>
+  ) : (
+    <Redirect to="/profile"></Redirect>
   );
 }
 
