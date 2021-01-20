@@ -8,8 +8,8 @@ const service = axios.create({
 // Nosotros vamos a mandar las credenciales siempre que utilicemos al usuario en sesion o querramos utilizar la sesion
 
 const MY_SERVICES = {
-  updateUser: async (userId, values) => {
-    return await service.put(`/users/${userId}`, values);
+  updateUser: async (userId, user) => {
+    return await service.put(`/users/${userId}`, user);
   },
 };
 

@@ -1,15 +1,24 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../index.css";
 import logo from "../images/logo192.png";
 import { Context } from "../context";
+import { logout } from "../services/auth";
 
 const styles = {
   color: "white",
 };
 
 function LayoutApp({ children }) {
-  const { user } = useContext(Context);
+  const { clearCtxUser, user } = useContext(Context);
+  const history = useHistory();
+
+  const logoutProcess = async () => {
+    await logout();
+    clearCtxUser(user);
+    history.push("/login");
+  };
+
   return (
     <div>
       <div className="navbar">
@@ -26,11 +35,15 @@ function LayoutApp({ children }) {
                 Profile
               </Link>
             </li>
-            <li>
-              <Link style={styles} to="/logout">
-                Logout
-              </Link>
-            </li>
+            {user ? (
+              <li>
+                <Link style={styles} onClick={() => logoutProcess()}>
+                  Logout
+                </Link>
+              </li>
+            ) : (
+              <></>
+            )}
             {!user ? (
               <>
                 <li>

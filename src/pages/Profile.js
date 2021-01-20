@@ -10,16 +10,19 @@ function Profile() {
   const { user } = useContext(Context);
   const [editMode, setEditMode] = useState(false);
   const inputName = useRef(null);
+
   const toggleEdit = () => {
     setEditMode(!editMode);
     console.log("On Edit Mode");
   };
+
   const editUser = async () => {
     console.log(`User updated, value: ${inputName.current.value}`);
     setEditMode(!editMode);
     user.username = inputName.current.value;
     await updateUser(user._id, user);
   };
+
   return user ? (
     <div>
       {!editMode ? (

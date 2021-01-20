@@ -21,7 +21,7 @@ export default function OurProvider({ children }) {
   function loginUser(user) {
     setuser(user);
   }
-  function logout() {
+  function clearCtxUser() {
     setuser(null);
   }
 
@@ -30,7 +30,7 @@ export default function OurProvider({ children }) {
       value={{
         user,
         loginUser,
-        logout,
+        clearCtxUser,
       }}
     >
       {children}
