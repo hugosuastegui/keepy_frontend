@@ -1,9 +1,16 @@
 import React, { useContext, useState, useRef } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
-import { EditOutlined, CheckOutlined } from "@ant-design/icons";
+import { Card } from "antd";
+import {
+  EditOutlined,
+  CheckOutlined,
+  DeleteOutlined,
+  SelectOutlined,
+} from "@ant-design/icons";
 import MY_SERVICES from "../services/index";
 
+const { Meta } = Card;
 const { updateUser } = MY_SERVICES;
 
 function Profile() {
@@ -14,6 +21,10 @@ function Profile() {
   const toggleEdit = () => {
     setEditMode(!editMode);
     console.log("On Edit Mode");
+  };
+
+  const toggleProjectForm = () => {
+    console.log("On toggleProjectForm");
   };
 
   const editUser = async () => {
@@ -43,6 +54,28 @@ function Profile() {
           <EditOutlined />
         </button>
       )}
+      <p>Here you can find all the projects you've created.</p>
+      <button onClick={() => toggleProjectForm()}>Add a New Project</button>
+      <br />
+      <br />
+      <div>
+        <Card
+          style={{ width: 300 }}
+          // cover={
+          //   <img
+          //     alt="example"
+          //     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+          //   />
+          // }
+          actions={[
+            <EditOutlined key="edit" />,
+            <DeleteOutlined key="setting" />,
+            <SelectOutlined key="select" />,
+          ]}
+        >
+          <Meta title="Project name" description="Project description" />
+        </Card>
+      </div>
     </div>
   ) : (
     <Redirect to="/login" />

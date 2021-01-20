@@ -5,18 +5,7 @@ export const Context = createContext();
 
 export default function OurProvider({ children }) {
   const [user, setuser] = useState(null);
-
-  async function getSession() {
-    const { user } = await getCurrentUser();
-    console.log(user);
-    if (user?.email) {
-      loginUser(user);
-    }
-  }
-
-  useEffect(() => {
-    getSession();
-  }, []);
+  const [project, setProject] = useState(null);
 
   function loginUser(user) {
     setuser(user);
@@ -24,6 +13,17 @@ export default function OurProvider({ children }) {
   function clearCtxUser() {
     setuser(null);
   }
+
+  useEffect(() => {
+    async function getSession() {
+      const { user } = await getCurrentUser();
+      console.log(user);
+      if (user?.email) {
+        loginUser(user);
+      }
+    }
+    getSession();
+  }, []);
 
   return (
     <Context.Provider
