@@ -11,6 +11,14 @@ const MY_SERVICES = {
   updateUser: async (userId, user) => {
     return await service.put(`/users/${userId}`, user);
   },
+
+  createProject: async (project) => {
+    return await service.post("/projects", project);
+  },
+
+  getProjects: async () => {
+    return await service.get("/projects");
+  },
 };
 
 export default MY_SERVICES;

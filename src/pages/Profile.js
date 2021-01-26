@@ -1,7 +1,7 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
-import { Card } from "antd";
+import { Card, Form, Input, Button } from "antd";
 import {
   EditOutlined,
   CheckOutlined,
@@ -11,20 +11,29 @@ import {
 import MY_SERVICES from "../services/index";
 
 const { Meta } = Card;
-const { updateUser } = MY_SERVICES;
+const { updateUser, createProject } = MY_SERVICES;
 
 function Profile() {
   const { user } = useContext(Context);
   const [editMode, setEditMode] = useState(false);
+  const [projectForm, setProjectForm] = useState(false);
+  const [projects, setProjects] = useState(null);
+  const [form] = Form.useForm();
   const inputName = useRef(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(user.projects);
+    };
+    fetchData();
+  }, []);
 
   const toggleEdit = () => {
     setEditMode(!editMode);
-    console.log("On Edit Mode");
   };
 
   const toggleProjectForm = () => {
-    console.log("On toggleProjectForm");
+    setProjectForm(!projectForm);
   };
 
   const editUser = async () => {
@@ -32,6 +41,12 @@ function Profile() {
     setEditMode(!editMode);
     user.username = inputName.current.value;
     await updateUser(user._id, user);
+  };
+
+  const onFinishProjectForm = async (values) => {
+    console.log(values);
+    setProjectForm(!projectForm);
+    await createProject(values);
   };
 
   return user ? (
@@ -54,27 +69,69 @@ function Profile() {
           <EditOutlined />
         </button>
       )}
+
       <p>Here you can find all the projects you've created.</p>
+
       <button onClick={() => toggleProjectForm()}>Add a New Project</button>
       <br />
       <br />
-      <div>
-        <Card
-          style={{ width: 300 }}
-          // cover={
-          //   <img
-          //     alt="example"
-          //     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          //   />
-          // }
-          actions={[
-            <EditOutlined key="edit" />,
-            <DeleteOutlined key="setting" />,
-            <SelectOutlined key="select" />,
-          ]}
+      {projectForm ? (
+        <Form
+          name="projectForm"
+          form={form}
+          layout="vertical"
+          onFinish={onFinishProjectForm}
         >
-          <Meta title="Project name" description="Project description" />
-        </Card>
+          <Form.Item
+            label="Project's Name"
+            name="name"
+            rules={[
+              { required: true, message: "Please input your project's name" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: "Please input your project's description",
+              },
+            ]}
+          >
+            <Input.TextArea />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      ) : (
+        <></>
+      )}
+      <div>
+        {projects ? (
+          projects.map((project, ind) => (
+            <Card
+              style={{ width: 300 }}
+              key={ind}
+              actions={[
+                <EditOutlined key="edit" />,
+                <DeleteOutlined key="setting" />,
+                <SelectOutlined key="select" />,
+              ]}
+            >
+              <Meta title={project.name} description={project.description} />
+            </Card>
+          ))
+        ) : (
+          <p>No projects to show yet, start off by creating a new project</p>
+        )}
       </div>
     </div>
   ) : (
