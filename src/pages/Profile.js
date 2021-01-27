@@ -14,7 +14,7 @@ import { getCurrentUser } from "../services/auth";
 const { Meta } = Card;
 const { updateUser, createProject } = MY_SERVICES;
 
-function Profile() {
+function Profile({ history }) {
   const { user } = useContext(Context);
   const [editMode, setEditMode] = useState(false);
   const [projectForm, setProjectForm] = useState(false);
@@ -30,7 +30,7 @@ function Profile() {
         },
       } = await getCurrentUser();
       setProjectsList(projects);
-      console.log(projectsList);
+      console.log(projects);
     }
     fetchInfo();
   }, []);
@@ -51,9 +51,9 @@ function Profile() {
   };
 
   const onFinishProjectForm = async (values) => {
-    console.log(values);
     setProjectForm(!projectForm);
     await createProject(values);
+    history.push("/profile");
   };
 
   return user ? (
@@ -122,7 +122,7 @@ function Profile() {
         <></>
       )}
       <div>
-        {projectsList.length === 1 ? (
+        {projectsList.length !== 0 ? (
           projectsList.map((project, ind) => (
             <Card
               style={{ width: 300 }}
