@@ -9,6 +9,7 @@ import {
   SelectOutlined,
 } from "@ant-design/icons";
 import MY_SERVICES from "../services/index";
+import { getCurrentUser } from "../services/auth";
 
 const { Meta } = Card;
 const { updateUser, createProject } = MY_SERVICES;
@@ -17,15 +18,21 @@ function Profile() {
   const { user } = useContext(Context);
   const [editMode, setEditMode] = useState(false);
   const [projectForm, setProjectForm] = useState(false);
-  const [projects, setProjects] = useState(null);
+  const [projectsList, setProjectsList] = useState([]);
   const [form] = Form.useForm();
   const inputName = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      console.log(user.projects);
-    };
-    fetchData();
+    async function fetchInfo() {
+      const {
+        data: {
+          user: { projects },
+        },
+      } = await getCurrentUser();
+      setProjectsList(projects);
+      console.log(projectsList);
+    }
+    fetchInfo();
   }, []);
 
   const toggleEdit = () => {
@@ -115,8 +122,8 @@ function Profile() {
         <></>
       )}
       <div>
-        {projects ? (
-          projects.map((project, ind) => (
+        {projectsList.length === 1 ? (
+          projectsList.map((project, ind) => (
             <Card
               style={{ width: 300 }}
               key={ind}

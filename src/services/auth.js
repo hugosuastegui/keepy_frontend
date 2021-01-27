@@ -18,8 +18,7 @@ export const login = async (userData) => {
 };
 
 export const getCurrentUser = async () => {
-  const { data: user } = await authService.get("/currentuser");
-  return user;
+  return await authService.get("/currentuser");
 };
 
 export const logout = async () => {

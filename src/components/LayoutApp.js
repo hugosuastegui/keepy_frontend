@@ -37,7 +37,11 @@ function LayoutApp({ children }) {
             </li>
             {user ? (
               <li>
-                <Link style={styles} onClick={() => logoutProcess()}>
+                <Link
+                  to="/login"
+                  style={styles}
+                  onClick={() => logoutProcess()}
+                >
                   Logout
                 </Link>
               </li>

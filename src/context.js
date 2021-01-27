@@ -17,7 +17,6 @@ export default function OurProvider({ children }) {
   useEffect(() => {
     async function getSession() {
       const { user } = await getCurrentUser();
-      console.log(user);
       if (user?.email) {
         loginUser(user);
       }
