@@ -33,7 +33,7 @@ function Profile({ history }) {
       console.log(projects);
     }
     fetchInfo();
-  }, []);
+  }, [projectForm]);
 
   const toggleEdit = () => {
     setEditMode(!editMode);
@@ -51,9 +51,9 @@ function Profile({ history }) {
   };
 
   const onFinishProjectForm = async (values) => {
-    setProjectForm(!projectForm);
     await createProject(values);
-    history.push("/profile");
+    form.resetFields();
+    setProjectForm(!projectForm);
   };
 
   return user ? (
@@ -61,11 +61,7 @@ function Profile({ history }) {
       {!editMode ? (
         <h1 style={{ display: "inline" }}>Welcome {user.username}</h1>
       ) : (
-        <input
-          ref={inputName}
-          defaultValue={user.username}
-          // onBlur={(e) => editUser(e.target.value)}
-        ></input>
+        <input ref={inputName} defaultValue={user.username}></input>
       )}
       {editMode ? (
         <button onClick={() => editUser()} style={{ margin: "5px" }}>
@@ -125,7 +121,7 @@ function Profile({ history }) {
         {projectsList.length !== 0 ? (
           projectsList.map((project, ind) => (
             <Card
-              style={{ width: 300 }}
+              style={{ width: 300, margin: "10px" }}
               key={ind}
               actions={[
                 <EditOutlined key="edit" />,
