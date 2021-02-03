@@ -14,7 +14,7 @@ import MY_SERVICES from "../services/index";
 import { getCurrentUser } from "../services/auth";
 const { updateUser } = MY_SERVICES;
 
-function Profile() {
+function Projects() {
   const { user } = useContext(Context);
   const [editMode, setEditMode] = useState(false);
   const [projectForm, setProjectForm] = useState(false);
@@ -90,4 +90,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Projects;

@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
+import { Layout, Menu } from "antd";
 import { Link, useHistory } from "react-router-dom";
-import "../index.css";
-import logo from "../images/logo192.png";
+import {
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
+
 import { Context } from "../context";
 import { logout } from "../services/auth";
 
-const styles = {
-  color: "white",
-};
+const { Content, Sider } = Layout;
 
 function LayoutApp({ children }) {
   const { clearCtxUser, user } = useContext(Context);
@@ -20,80 +23,45 @@ function LayoutApp({ children }) {
   };
 
   return (
-    <div>
-      <div className="navbar">
-        <img
-          className="logo"
-          src={logo}
-          alt="Logo"
-          style={{ height: "2rem" }}
-        />
-        <nav>
-          <ul>
-            <li>
-              <Link style={styles} to="/profile">
-                Profile
-              </Link>
-            </li>
-            {user ? (
-              <li>
-                <Link
-                  to="/login"
-                  style={styles}
-                  onClick={() => logoutProcess()}
-                >
-                  Logout
-                </Link>
-              </li>
-            ) : (
-              <></>
-            )}
-            {!user ? (
-              <>
-                <li>
-                  <Link style={styles} to="/login">
-                    Log In
-                  </Link>
-                </li>
-                <li>
-                  <Link style={styles} to="/signup">
-                    Sign Up
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <></>
-            )}
-          </ul>
-        </nav>
-      </div>
+    <Layout style={{ height: "100vh" }}>
       {user && (
-        <div className="sidebar">
-          <nav className="menu">
-            <ul>
-              <li>Project</li>
-              <li>
-                <Link style={styles} to="/projects">
-                  My Projects
-                </Link>
-              </li>
-              <li>
-                <Link style={styles} to="/brief">
-                  Brief
-                </Link>
-              </li>
-              <li>
-                <Link style={styles} to="/ledger">
-                  Ledger
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <Sider breakpoint="lg" collapsedWidth="0">
+          <div className="logo" />
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
+            <Menu.Item key="1">Logo</Menu.Item>
+            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+              {user.projects.length === 0 ? (
+                <Link to="/projects/new">New Project</Link>
+              ) : (
+                <Link to="/projects">Projects</Link>
+              )}
+            </Menu.Item>
+            <Menu.Item key="3" icon={<UploadOutlined />}>
+              <Link to="/brief">Brief</Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<UserOutlined />}>
+              <Link to="/ledger">Ledger</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<UserOutlined />}>
+              <Link to="/profile">Profile</Link>
+            </Menu.Item>
+            <Menu.Item key="6" icon={<UserOutlined />} onClick={logoutProcess}>
+              Logout
+            </Menu.Item>
+          </Menu>
+        </Sider>
       )}
-      <br />
-      <div className="content">{children}</div>
-    </div>
+      <Layout style={{ height: "100vh" }}>
+        <Content style={{ margin: "24px 16px 0" }}>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 360 }}
+          >
+            {children}
+          </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
 

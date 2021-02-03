@@ -1,5 +1,6 @@
 body {
-  padding: 40px 0px 0px 0px;
+  margin: 0;
+  text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -7,50 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.logo {
-  margin-left: 20px;
-}
-
-.navbar {
-  background-color: black;
-  width: 100%;
-  height: 50px;
-  position: fixed;
-  top: 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1;
-}
-
-.navbar ul {
-  display: inline;
-  padding: 0;
-  margin-right: 20px;
-}
-
-.navbar li {
-  display: inline;
-  margin: 4px;
-}
-
-.sidebar {
-  background-color: grey;
-  width: 100px;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  margin-top: 10px;
-}
-
-.sidebar ul {
-  padding: 10px;
-}
-
-.sidebar li {
-  list-style-type: none;
-}
-
-.content {
-  margin: 0px 20px 20px 120px;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }

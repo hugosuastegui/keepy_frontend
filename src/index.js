@@ -6,11 +6,9 @@ import "antd/dist/antd.css";
 import OurProvider from "./context";
 
 ReactDOM.render(
-  // <React.StrictMode>
   <OurProvider>
     <Router />
   </OurProvider>,
-  // </React.StrictMode>,
   document.getElementById("root")
 );
 

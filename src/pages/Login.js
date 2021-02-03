@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Form, Input, Button, notification, Typography } from "antd";
 import { login } from "../services/auth";
 import { Context } from "../context";
@@ -15,7 +15,6 @@ function Login() {
       openNotificationWithIcon(err.response.data.message);
     });
     delete user.password;
-    // Context
     loginUser(user);
   }
 
@@ -27,38 +26,43 @@ function Login() {
   };
 
   return !user ? (
-    <Form
-      layout="vertical"
-      name="basic"
-      form={form}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-    >
-      <Title>Log In</Title>
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[{ required: true, message: "Please input your username!" }]}
+    <>
+      <Form
+        layout="vertical"
+        name="basic"
+        form={form}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
       >
-        <Input />
-      </Form.Item>
+        <Title>Log In</Title>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your username!" }]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
-      >
-        <Input.Password />
-      </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: "Please input your password!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Login
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
+      <p>
+        New to this site? <Link to="/">Sign up</Link> for free
+      </p>
+    </>
   ) : (
-    <Redirect to="/profile" />
+    <Redirect to="/projects" />
   );
 }
 
