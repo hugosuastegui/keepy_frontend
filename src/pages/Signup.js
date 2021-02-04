@@ -1,17 +1,25 @@
 import React, { useContext } from "react";
 import { Form, Input, Button, Typography } from "antd";
-import { signup } from "../services/auth";
+import { signup, login } from "../services/auth";
 import { Link, Redirect } from "react-router-dom";
 import { Context } from "../context";
 
 const { Title } = Typography;
 
 function Signup({ history }) {
-  const { user } = useContext(Context);
+  const { user, loginUser } = useContext(Context);
   const [form] = Form.useForm();
 
-  async function onFinish(values) {
+  async function signupProcess(values) {
+    console.log(values);
     await signup(values);
+    const {
+      data: { user },
+    } = await login(values);
+    delete user.password;
+    delete user.hash;
+    delete user.salt;
+    loginUser(user);
     history.push("/projects");
   }
 
@@ -22,7 +30,7 @@ function Signup({ history }) {
         name="basic"
         form={form}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
+        onFinish={signupProcess}
       >
         <Title>Sign Up</Title>
         <Form.Item
