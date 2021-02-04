@@ -1,25 +1,17 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Redirect, Link } from "react-router-dom";
 import { Context } from "../context";
 
 // Components in page
 import ProjectCard from "../components/ProjectCard";
-import ProjectForm from "../components/ProjectForm";
-
-import { EditOutlined, CheckOutlined } from "@ant-design/icons";
 
 // Services in page
 
-import MY_SERVICES from "../services/index";
 import { getCurrentUser } from "../services/auth";
-const { updateUser } = MY_SERVICES;
 
 function Projects() {
   const { user } = useContext(Context);
-  const [editMode, setEditMode] = useState(false);
-  const [projectForm, setProjectForm] = useState(false);
   const [projectsList, setProjectsList] = useState([]);
-  const inputName = useRef(null);
 
   useEffect(() => {
     async function fetchInfo() {
@@ -28,60 +20,28 @@ function Projects() {
           user: { projects },
         },
       } = await getCurrentUser();
+      console.log(projects);
       setProjectsList(projects);
+      console.log(projectsList);
     }
     fetchInfo();
-  }, [projectForm]);
-
-  const toggleEdit = () => {
-    setEditMode(!editMode);
-  };
-
-  const toggleProjectForm = () => {
-    setProjectForm(!projectForm);
-  };
-
-  const editUser = async () => {
-    console.log(`User updated, value: ${inputName.current.value}`);
-    setEditMode(!editMode);
-    user.username = inputName.current.value;
-    await updateUser(user._id, user);
-  };
+  }, []);
 
   return user ? (
     <div>
-      {!editMode ? (
-        <h1 style={{ display: "inline" }}>Welcome {user.username}</h1>
-      ) : (
-        <input ref={inputName} defaultValue={user.username}></input>
-      )}
-      {editMode ? (
-        <button onClick={() => editUser()} style={{ margin: "5px" }}>
-          <CheckOutlined />
-        </button>
-      ) : (
-        <button onClick={() => toggleEdit()} style={{ margin: "5px" }}>
-          <EditOutlined />
-        </button>
-      )}
-
-      <p>Here you can find all the projects you've created.</p>
-
-      <button onClick={() => toggleProjectForm()}>Add a New Project</button>
+      <h1 style={{ display: "inline" }}>Welcome {user.username}</h1>
       <br />
       <br />
-      {projectForm ? (
-        <ProjectForm toggle={setProjectForm}></ProjectForm>
-      ) : (
-        <></>
-      )}
       <div>
         {projectsList.length !== 0 ? (
           projectsList.map((project, ind) => (
             <ProjectCard key={ind} project={project} index={ind}></ProjectCard>
           ))
         ) : (
-          <p>No projects to show yet, start off by creating a new project</p>
+          <p>
+            No projects to show yet, start off by creating a{" "}
+            <Link to="/projects/new">New Project</Link>
+          </p>
         )}
       </div>
     </div>

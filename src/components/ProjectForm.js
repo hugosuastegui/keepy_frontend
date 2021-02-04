@@ -1,21 +1,30 @@
-import React from "react";
-import { Form, Input, Button } from "antd";
+import React, { useContext } from "react";
+import { Redirect } from "react-router-dom";
+import { Form, Input, Button, Select } from "antd";
+
+import { Context } from "../context";
 import MY_SERVICES from "../services/index";
+
+const { Option } = Select;
 
 const { createProject } = MY_SERVICES;
 
-function ProjectForm({ initial, toggle }) {
+function ProjectForm({ history }) {
+  const { user } = useContext(Context);
   const [form] = Form.useForm();
 
   const onFinishProjectForm = async (values) => {
+    console.log(values);
     await createProject(values);
-    form.resetFields();
-    toggle(false);
+    history.push("/projects");
   };
 
-  return (
+  const handleChange = (values) => {
+    console.log(values);
+  };
+
+  return user ? (
     <Form
-      initialValues={initial}
       name="projectForm"
       form={form}
       layout="vertical"
@@ -44,12 +53,25 @@ function ProjectForm({ initial, toggle }) {
         <Input.TextArea />
       </Form.Item>
 
+      <Form.Item label="Category" name="category" rules={[{ required: true }]}>
+        <Select
+          style={{ width: "100%" }}
+          placeholder="Please select"
+          onChange={handleChange}
+        >
+          <Option key={"business"}>Business</Option>
+          <Option key={"project"}>Project</Option>,
+        </Select>
+      </Form.Item>
+
       <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
     </Form>
+  ) : (
+    <Redirect to="/projects"></Redirect>
   );
 }
 

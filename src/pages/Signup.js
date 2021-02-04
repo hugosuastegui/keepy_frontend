@@ -13,12 +13,8 @@ function Signup({ history }) {
   async function signupProcess(values) {
     console.log(values);
     await signup(values);
-    const {
-      data: { user },
-    } = await login(values);
+    const user = await login(values);
     delete user.password;
-    delete user.hash;
-    delete user.salt;
     loginUser(user);
     history.push("/projects");
   }
@@ -34,7 +30,7 @@ function Signup({ history }) {
       >
         <Title>Sign Up</Title>
         <Form.Item
-          label="username"
+          label="Username"
           name="username"
           rules={[{ required: true, message: "Please input your username!" }]}
         >

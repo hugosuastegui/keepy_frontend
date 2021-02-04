@@ -58,7 +58,7 @@ function Login() {
         </Form.Item>
       </Form>
       <p>
-        New to this site? <Link to="/">Sign up</Link> for free
+        New to this site? <Link to="/">Sign up for free</Link>
       </p>
     </>
   ) : (
