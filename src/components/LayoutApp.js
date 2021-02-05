@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Layout, Menu } from "antd";
 import { Link, useHistory } from "react-router-dom";
+import "../index.css";
 import {
   UploadOutlined,
   UserOutlined,
@@ -23,7 +24,7 @@ function LayoutApp({ children }) {
   };
 
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout className="layout-style">
       {user && (
         <Sider breakpoint="lg" collapsedWidth="0">
           <div className="logo" />

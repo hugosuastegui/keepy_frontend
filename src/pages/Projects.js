@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
+import { Button, Typography } from "antd";
 import { Context } from "../context";
 
 // Components in page
@@ -8,6 +9,8 @@ import ProjectCard from "../components/ProjectCard";
 // Services in page
 
 import { getCurrentUser } from "../services/auth";
+
+const { Title } = Typography;
 
 function Projects() {
   const { user } = useContext(Context);
@@ -20,28 +23,28 @@ function Projects() {
           user: { projects },
         },
       } = await getCurrentUser();
-      console.log(projects);
       setProjectsList(projects);
-      console.log(projectsList);
     }
     fetchInfo();
   }, []);
 
   return user ? (
     <div>
-      <h1 style={{ display: "inline" }}>Welcome {user.username}</h1>
+      <Title>Projects List</Title>
+      <Button type="primary">
+        <Link to="/projects/new">New project</Link>
+      </Button>
       <br />
       <br />
-      <div>
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
         {projectsList.length !== 0 ? (
           projectsList.map((project, ind) => (
             <ProjectCard key={ind} project={project} index={ind}></ProjectCard>
           ))
         ) : (
-          <p>
-            No projects to show yet, start off by creating a{" "}
-            <Link to="/projects/new">New Project</Link>
-          </p>
+          <p>No projects to show yet, start off by creating a new one</p>
         )}
       </div>
     </div>
