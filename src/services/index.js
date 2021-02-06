@@ -19,6 +19,9 @@ const MY_SERVICES = {
   getProjects: async () => {
     return await service.get("/projects");
   },
+  getProject: async (projectId) => {
+    return await service.get(`/projects/${projectId}`);
+  },
 };
 
 export default MY_SERVICES;

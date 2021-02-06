@@ -12,7 +12,7 @@ import { getCurrentUser } from "../services/auth";
 
 const { Title } = Typography;
 
-function Projects() {
+function Projects({ history }) {
   const { user } = useContext(Context);
   const [projectsList, setProjectsList] = useState([]);
 
@@ -41,7 +41,12 @@ function Projects() {
       >
         {projectsList.length !== 0 ? (
           projectsList.map((project, ind) => (
-            <ProjectCard key={ind} project={project} index={ind}></ProjectCard>
+            <ProjectCard
+              key={ind}
+              project={project}
+              index={ind}
+              history={history}
+            ></ProjectCard>
           ))
         ) : (
           <p>No projects to show yet, start off by creating a new one</p>

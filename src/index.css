@@ -13,6 +13,6 @@ code {
     monospace;
 }
 
-.layout-style {
-  height: 100%;
+.layout {
+  height: 100vh;
 }

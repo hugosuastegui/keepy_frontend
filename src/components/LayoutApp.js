@@ -24,7 +24,7 @@ function LayoutApp({ children }) {
   };
 
   return (
-    <Layout className="layout-style">
+    <Layout className="layout">
       {user && (
         <Sider breakpoint="lg" collapsedWidth="0">
           <div className="logo" />

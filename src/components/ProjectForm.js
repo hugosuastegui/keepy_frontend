@@ -9,12 +9,11 @@ const { Option } = Select;
 
 const { createProject } = MY_SERVICES;
 
-function ProjectForm({ history }) {
+function ProjectForm({ history, initial }) {
   const { user } = useContext(Context);
   const [form] = Form.useForm();
 
   const onFinishProjectForm = async (values) => {
-    console.log(values);
     await createProject(values);
     history.push("/projects");
   };
@@ -25,6 +24,7 @@ function ProjectForm({ history }) {
 
   return user ? (
     <Form
+      initialValues={initial}
       name="projectForm"
       form={form}
       layout="vertical"

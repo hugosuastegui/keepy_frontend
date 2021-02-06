@@ -5,9 +5,9 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Projects from "./pages/Projects";
 import NewProject from "./pages/NewProject";
+import EditProject from "./pages/EditProject";
 
 const Profile = () => <h1>Profile</h1>;
-const EditProject = () => <h1>Project Details</h1>;
 const Brief = () => <h1>Brief</h1>;
 const Ledger = () => <h1>Ledger</h1>;
 const Subaccounts = () => <h1>Subaccounts</h1>;

@@ -1,19 +1,41 @@
-// import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
+import { Typography, Form } from "antd";
+import ProjectForm from "../components/ProjectForm";
+import MY_SERVICES from "../services";
 
-// function EditProject() {
-//     const [project, setProject] = useState(null)
+const { getProject } = MY_SERVICES;
+const { Title } = Typography;
 
-//     useEffect(() => {
-//         async function fetchProject() => {
+function EditProject({
+  match: {
+    params: { projectId },
+  },
+  history,
+}) {
+  const [projectItem, setProjectItem] = useState(null);
 
-//         }
-//     }, [])
+  useEffect(() => {
+    async function fetchInfo() {
+      const {
+        data: { project },
+      } = await getProject(projectId);
+      console.log(project);
+      setProjectItem(project);
+      console.log(projectItem);
+    }
+    fetchInfo();
+  }, []);
 
-//     return (
-//         <div>
+  return (
+    projectItem && (
+      <div>
+        <Title>Edit</Title>
+        <Title level={2}>{projectItem.name}</Title>
+        <br />
+        <ProjectForm history={history} initial={projectItem}></ProjectForm>
+      </div>
+    )
+  );
+}
 
-//         </div>
-//     )
-// }
-
-// export default EditProject
+export default EditProject;
