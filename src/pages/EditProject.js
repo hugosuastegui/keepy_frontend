@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Form } from "antd";
+import { Typography } from "antd";
 import ProjectForm from "../components/ProjectForm";
 import MY_SERVICES from "../services";
 
-const { getProject } = MY_SERVICES;
+const { getProject, updateProject } = MY_SERVICES;
 const { Title } = Typography;
 
 function EditProject({
@@ -19,9 +19,7 @@ function EditProject({
       const {
         data: { project },
       } = await getProject(projectId);
-      console.log(project);
       setProjectItem(project);
-      console.log(projectItem);
     }
     fetchInfo();
   }, []);
@@ -32,7 +30,11 @@ function EditProject({
         <Title>Edit</Title>
         <Title level={2}>{projectItem.name}</Title>
         <br />
-        <ProjectForm history={history} initial={projectItem}></ProjectForm>
+        <ProjectForm
+          history={history}
+          initial={projectItem}
+          action={updateProject}
+        ></ProjectForm>
       </div>
     )
   );

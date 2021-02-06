@@ -15,12 +15,14 @@ const MY_SERVICES = {
   createProject: async (project) => {
     return await service.post("/projects", project);
   },
-
   getProjects: async () => {
     return await service.get("/projects");
   },
   getProject: async (projectId) => {
     return await service.get(`/projects/${projectId}`);
+  },
+  updateProject: async (projectId, project) => {
+    return await service.put(`/projects/${projectId}`, project);
   },
 };
 
