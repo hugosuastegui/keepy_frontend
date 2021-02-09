@@ -26,6 +26,7 @@ function Projects({ history }) {
       setProjectsList(projects);
     }
     fetchInfo();
+    return null;
   }, []);
 
   return user ? (

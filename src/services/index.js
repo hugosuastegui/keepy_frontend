@@ -24,6 +24,9 @@ const MY_SERVICES = {
   updateProject: async (projectId, project) => {
     return await service.put(`/projects/${projectId}`, project);
   },
+  deleteProject: async (projectId) => {
+    return await service.delete(`/projects/${projectId}`);
+  },
 };
 
 export default MY_SERVICES;

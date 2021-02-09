@@ -7,6 +7,14 @@ export default function OurProvider({ children }) {
   const [user, setuser] = useState(null);
   const [project, setProject] = useState(null);
 
+  function setCtxProject(project) {
+    setProject(project);
+  }
+
+  function clearCtxProject() {
+    setProject(null);
+  }
+
   function loginUser(user) {
     setuser(user);
   }
@@ -30,6 +38,9 @@ export default function OurProvider({ children }) {
         user,
         loginUser,
         clearCtxUser,
+        project,
+        setCtxProject,
+        clearCtxProject,
       }}
     >
       {children}
