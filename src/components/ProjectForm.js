@@ -10,7 +10,7 @@ function ProjectForm({ history, initial, action }) {
   const [form] = Form.useForm();
 
   const onFinishProjectForm = async (values) => {
-    await action(values);
+    await action(initial._id, values);
     history.push("/projects");
   };
 

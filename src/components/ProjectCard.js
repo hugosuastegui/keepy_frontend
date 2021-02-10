@@ -8,21 +8,17 @@ import {
   SelectOutlined,
 } from "@ant-design/icons";
 
-const { deleteProject } = MY_SERVICES;
 const { Meta } = Card;
 
-function ProjectCard({ project, index, history }) {
+function ProjectCard({ project, index, history, eraseProject }) {
   const { setCtxProject } = useContext(Context);
+
   const editButton = async () => {
     history.push(`/projects/${project._id}`);
   };
   const selectProject = async () => {
     console.log(`Selected project: ${project.name}`);
     // setCtxProject(project);
-  };
-  const deleteProject = async () => {
-    console.log(`Project to be deleted is ${project.name}`);
-    // await deleteProject(project);
   };
 
   return (
@@ -31,7 +27,7 @@ function ProjectCard({ project, index, history }) {
       key={index}
       actions={[
         <EditOutlined key="edit" onClick={() => editButton()} />,
-        <DeleteOutlined key="setting" onClick={() => deleteProject()} />,
+        <DeleteOutlined key="setting" onClick={() => eraseProject()} />,
         <SelectOutlined key="select" onClick={() => selectProject()} />,
       ]}
     >
