@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Select, Option, Button, Typography } from "antd";
+import { Form, Input, Select, Button, Typography } from "antd";
 import MY_SERVICES from "../services";
 
 const { getProject, updateProject } = MY_SERVICES;
 const { Title } = Typography;
+const { Option } = Select;
 
 function EditProject({
   match: {

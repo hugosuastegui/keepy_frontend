@@ -43,12 +43,11 @@ function Projects({ history }) {
     // setCtxProject(project);
   };
 
-  const eraseProject = async (project, ind) => {
+  const eraseProject = async (project, index) => {
     console.log(`Project to be deleted is ${project._id}, ${project.name}`);
     await deleteProject(project._id);
-    const newProjectsList = projectsList.slice(ind);
-    console.log(newProjectsList);
-    // setProjectsList(newProjectsList);
+    const newProjectsList = projectsList.filter((el, ind) => ind !== index);
+    setProjectsList(newProjectsList);
   };
 
   return user ? (

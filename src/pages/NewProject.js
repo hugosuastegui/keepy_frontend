@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import Context from "../context";
+import { Context } from "../context";
 import { Redirect } from "react-router-dom";
-import { Form, Input, Select, Option, Button, Typography } from "antd";
+import { Form, Input, Select, Button, Typography } from "antd";
 import MY_SERVICES from "../services/index";
 
 const { createProject } = MY_SERVICES;
 const { Title } = Typography;
+const { Option } = Select;
 
 function NewProject({ history }) {
   const { user } = useContext(Context);
