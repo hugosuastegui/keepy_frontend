@@ -18,7 +18,7 @@ const { Meta } = Card;
 const { Title } = Typography;
 
 function Projects({ history }) {
-  const { user, setCtxProject } = useContext(Context);
+  const { user, setCtxProject, project } = useContext(Context);
   const [projectsList, setProjectsList] = useState([]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Projects({ history }) {
 
   const selectProject = async (project) => {
     console.log(`Selected project: ${project.name}`);
-    // setCtxProject(project);
+    setCtxProject(project);
   };
 
   const eraseProject = async (project, index) => {

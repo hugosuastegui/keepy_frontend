@@ -14,7 +14,7 @@ import { logout } from "../services/auth";
 const { Content, Sider } = Layout;
 
 function LayoutApp({ children }) {
-  const { clearCtxUser, user } = useContext(Context);
+  const { clearCtxUser, user, project, clearCtxProject } = useContext(Context);
   const history = useHistory();
 
   const logoutProcess = async () => {
@@ -30,12 +30,9 @@ function LayoutApp({ children }) {
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
             <Menu.Item key="1">Logo</Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              {user.projects.length === 0 ? (
-                <Link to="/projects/new">New Project</Link>
-              ) : (
-                <Link to="/projects">Projects</Link>
-              )}
+            <Menu.Item key="2">{project.name}</Menu.Item>
+            <Menu.Item key="3" icon={<VideoCameraOutlined />}>
+              <Link to={"/projects"}>Projects</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<UploadOutlined />}>
               <Link to="/brief">Brief</Link>
