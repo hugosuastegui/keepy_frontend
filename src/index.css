@@ -16,3 +16,7 @@ code {
 .layout {
   height: 100vh;
 }
+
+.selectedProject {
+  font-weight: bold;
+}

@@ -22,7 +22,7 @@ const router = () => (
         <Route component={NewProject} path="/projects/new" exact />
         <Route component={EditProject} path="/projects/:projectId" exact />
         <Route component={Brief} path="/brief/:projectId" exact />
-        <Route component={Ledger} path="/ledger/:projectId" exact />
+        <Route component={Ledger} path="/ledger" exact />
         <Route component={Subaccounts} path="/subaccounts/:projectId" exact />
         <Route component={Profile} path="/profile" exact />
       </Switch>

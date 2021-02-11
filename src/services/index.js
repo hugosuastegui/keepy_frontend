@@ -27,6 +27,18 @@ const MY_SERVICES = {
   deleteProject: async (projectId) => {
     return await service.delete(`/projects/${projectId}`);
   },
+  getAllConcepts: async (projectId) => {
+    return await service.get(`/concepts/${projectId}`);
+  },
+  createConcept: async (projectId, concept) => {
+    return await service.post(`/concepts/${projectId}`, concept);
+  },
+  deleteConcept: async (conceptId) => {
+    return await service.delete(`/concepts/${conceptId}`);
+  },
+  updateConcept: async (conceptId, concept) => {
+    return await service.put(`/concepts/${conceptId}`, concept);
+  },
 };
 
 export default MY_SERVICES;

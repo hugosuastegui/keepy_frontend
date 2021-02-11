@@ -30,20 +30,28 @@ function LayoutApp({ children }) {
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
             <Menu.Item key="1">Logo</Menu.Item>
-            <Menu.Item key="2">{project.name}</Menu.Item>
+            {project ? (
+              <Menu.Item key="2" className="selectedProject">
+                {project.name}
+              </Menu.Item>
+            ) : (
+              <Menu.Item key="2" className="selectedProject">
+                Select Project
+              </Menu.Item>
+            )}
             <Menu.Item key="3" icon={<VideoCameraOutlined />}>
               <Link to={"/projects"}>Projects</Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
+            <Menu.Item key="4" icon={<UploadOutlined />}>
               <Link to="/brief">Brief</Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<UserOutlined />}>
+            <Menu.Item key="5" icon={<UserOutlined />}>
               <Link to="/ledger">Ledger</Link>
             </Menu.Item>
-            <Menu.Item key="5" icon={<UserOutlined />}>
+            <Menu.Item key="6" icon={<UserOutlined />}>
               <Link to="/profile">Profile</Link>
             </Menu.Item>
-            <Menu.Item key="6" icon={<UserOutlined />} onClick={logoutProcess}>
+            <Menu.Item key="7" icon={<UserOutlined />} onClick={logoutProcess}>
               Logout
             </Menu.Item>
           </Menu>
