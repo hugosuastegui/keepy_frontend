@@ -28,7 +28,7 @@ function Ledger() {
         <>
           <p>Before you can add any concept yo have to first add Subaccounts</p>
           <Button type="default">
-            <Link to={`/subaccounts/${project._id}`}>Subaccounts</Link>
+            <Link to={`/subaccounts`}>Subaccounts</Link>
           </Button>
         </>
       ) : (

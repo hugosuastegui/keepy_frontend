@@ -1,31 +1,44 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../context";
 import MY_SERVICES from "../services/index";
-import { Form, Input, Radio, Button, Typography } from "antd";
+import { Form, Input, Radio, Button, Typography, Tag } from "antd";
 
-const { getSubaccounts } = MY_SERVICES;
+const { getSubaccounts, createSubaccount } = MY_SERVICES;
 const { Title } = Typography;
 
 function Subaccounts() {
   const [items, setItems] = useState([]);
-  const { user, project } = useContext(Context);
+  const [itemsToCreate, setitemsToCreate] = useState([]);
+  const { project } = useContext(Context);
   const [form] = Form.useForm();
 
   useEffect(() => {
     async function fetchSubaccounts() {
       const { subaccounts } = await getSubaccounts(project._id);
-      console.log(subaccounts);
-      setItems(subaccounts);
+      if (subaccounts !== undefined) {
+        setItems(subaccounts);
+        console.log(subaccounts);
+      }
     }
     fetchSubaccounts();
   }, []);
 
-  const createSubaccount = (values) => {
-    console.log(values);
+  const addSubaccount = (values) => {
+    const array = itemsToCreate;
+    array.push({ ...values, project: project._id });
+    setitemsToCreate(array);
+    setItems([...items, values]);
+    form.resetFields();
+  };
+
+  const createAllsubaccounts = async (array) => {
+    for (let i = 0; i < array.length; i++) {
+      await createSubaccount(array[i], project._id);
+    }
   };
 
   return (
-    <div>
+    <div className="subaccountWindow">
       <Title>Subaccounts</Title>
       <p>
         Subaccounts are ways to classify concepts by type. Ever wondered how
@@ -33,52 +46,76 @@ function Subaccounts() {
         Subaccount for that item so you can handle its metrics on the Brief
         section!
       </p>
-      <Form
-        name="projectForm"
-        form={form}
-        layout="vertical"
-        onFinish={createSubaccount}
+      <div className="rowContent">
+        <Form
+          name="projectForm"
+          form={form}
+          layout="vertical"
+          onFinish={addSubaccount}
+        >
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[
+              { required: true, message: "Please input your project's name" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Account"
+            name="account"
+            rules={[
+              { required: true, message: "Please input your project's name" },
+            ]}
+          >
+            <Radio.Group>
+              <Radio style={{ display: "block" }} value={"Revenue"}>
+                Revenue
+              </Radio>
+              <Radio style={{ display: "block" }} value={"COGS"}>
+                COGS
+              </Radio>
+              <Radio style={{ display: "block" }} value={"SG&A"}>
+                SG&A
+              </Radio>
+              <Radio style={{ display: "block" }} value={"Taxes"}>
+                Taxes
+              </Radio>
+              <Radio style={{ display: "block" }} value={"CapEx"}>
+                CapEx
+              </Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            <Button type="secondary" htmlType="submit">
+              Add
+            </Button>
+          </Form.Item>
+        </Form>
+        <div>
+          <Title level={5}>Existing subaccounts</Title>
+          <div className="tagBox">
+            {items.length !== 0 ? (
+              items.map((tag, ind) => (
+                <Tag key={ind} style={{ display: "inline" }}>
+                  {tag.name}
+                </Tag>
+              ))
+            ) : (
+              <p>No subaccounts created yet</p>
+            )}
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <Button
+        type="primary"
+        onClick={() => createAllsubaccounts(itemsToCreate)}
       >
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[
-            { required: true, message: "Please input your project's name" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Account"
-          name="account"
-          rules={[
-            { required: true, message: "Please input your project's name" },
-          ]}
-        >
-          <Radio.Group>
-            <Radio style={{ display: "block" }} value={"Revenue"}>
-              Revenue
-            </Radio>
-            <Radio style={{ display: "block" }} value={"COGS"}>
-              COGS
-            </Radio>
-            <Radio style={{ display: "block" }} value={"SG&A"}>
-              SG&A
-            </Radio>
-            <Radio style={{ display: "block" }} value={"Taxes"}>
-              Taxes
-            </Radio>
-            <Radio style={{ display: "block" }} value={"CapEx"}>
-              CapEx
-            </Radio>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+        Save Changes
+      </Button>
     </div>
   );
 }

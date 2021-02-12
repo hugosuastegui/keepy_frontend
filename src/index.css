@@ -14,9 +14,29 @@ code {
 }
 
 .layout {
-  height: 100vh;
+  height: 150vh;
 }
 
 .selectedProject {
   font-weight: bold;
+}
+
+.subaccountWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rowContent {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tagBox {
+  height: 89%;
+  width: 200px;
+  background-color: white;
+  border: 1px solid rgb(134, 130, 130);
 }
