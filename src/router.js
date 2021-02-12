@@ -6,11 +6,11 @@ import Login from "./pages/Login";
 import Projects from "./pages/Projects";
 import NewProject from "./pages/NewProject";
 import EditProject from "./pages/EditProject";
+import Ledger from "./pages/Ledger";
+import Subaccounts from "./pages/Subaccounts";
 
 const Profile = () => <h1>Profile</h1>;
 const Brief = () => <h1>Brief</h1>;
-const Ledger = () => <h1>Ledger</h1>;
-const Subaccounts = () => <h1>Subaccounts</h1>;
 
 const router = () => (
   <Router>

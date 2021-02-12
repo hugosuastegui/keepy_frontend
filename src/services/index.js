@@ -39,6 +39,18 @@ const MY_SERVICES = {
   updateConcept: async (conceptId, concept) => {
     return await service.put(`/concepts/${conceptId}`, concept);
   },
+  createSubaccount: async (subaccount, projectId) => {
+    return await service.post(`/subaccount/${projectId}`, subaccount);
+  },
+  getSubaccounts: async (projectId) => {
+    return await service.get(`/subaccount/${projectId}`);
+  },
+  deleteSubaccount: async (subaccountId) => {
+    return await service.delete(`/subaccount/${subaccountId}`);
+  },
+  editSubaccount: async (subaccountId, subaccount) => {
+    return await service.delete(`/subaccount/${subaccountId}`, subaccount);
+  },
 };
 
 export default MY_SERVICES;
