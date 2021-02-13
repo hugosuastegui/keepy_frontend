@@ -6,7 +6,7 @@ import { Form, Input, Radio, Button, Typography, Tag } from "antd";
 const { getSubaccounts, createSubaccount } = MY_SERVICES;
 const { Title } = Typography;
 
-function Subaccounts() {
+function Subaccounts({ history }) {
   const [items, setItems] = useState([]);
   const [itemsToCreate, setitemsToCreate] = useState([]);
   const { project } = useContext(Context);
@@ -14,14 +14,15 @@ function Subaccounts() {
 
   useEffect(() => {
     async function fetchSubaccounts() {
-      const { subaccounts } = await getSubaccounts(project._id);
+      const {
+        data: { subaccounts },
+      } = await getSubaccounts(project._id);
       if (subaccounts !== undefined) {
         setItems(subaccounts);
-        console.log(subaccounts);
       }
     }
     fetchSubaccounts();
-  }, []);
+  }, [project]);
 
   const addSubaccount = (values) => {
     const array = itemsToCreate;
@@ -35,6 +36,8 @@ function Subaccounts() {
     for (let i = 0; i < array.length; i++) {
       await createSubaccount(array[i], project._id);
     }
+    setitemsToCreate([]);
+    history.goBack();
   };
 
   return (
@@ -52,6 +55,7 @@ function Subaccounts() {
           form={form}
           layout="vertical"
           onFinish={addSubaccount}
+          style={{ margin: "1rem" }}
         >
           <Form.Item
             label="Name"
@@ -98,7 +102,7 @@ function Subaccounts() {
           <div className="tagBox">
             {items.length !== 0 ? (
               items.map((tag, ind) => (
-                <Tag key={ind} style={{ display: "inline" }}>
+                <Tag key={ind} style={{ margin: "5px" }}>
                   {tag.name}
                 </Tag>
               ))

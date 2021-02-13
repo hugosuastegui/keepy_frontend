@@ -18,7 +18,7 @@ const { Meta } = Card;
 const { Title } = Typography;
 
 function Projects({ history }) {
-  const { user, setCtxProject, project } = useContext(Context);
+  const { user, setCtxProject } = useContext(Context);
   const [projectsList, setProjectsList] = useState([]);
 
   useEffect(() => {
