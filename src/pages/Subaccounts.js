@@ -89,6 +89,12 @@ function Subaccounts({ history }) {
               <Radio style={{ display: "block" }} value={"CapEx"}>
                 CapEx
               </Radio>
+              <Radio style={{ display: "block" }} value={"Dividends"}>
+                Dividends
+              </Radio>
+              <Radio style={{ display: "block" }} value={"Retained Earnings"}>
+                Retained Earnings
+              </Radio>
             </Radio.Group>
           </Form.Item>
           <Form.Item>
