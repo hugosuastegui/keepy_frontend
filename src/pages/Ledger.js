@@ -56,9 +56,12 @@ function Ledger() {
   return user ? (
     <div>
       <Title>Ledger</Title>
-      <Button type="default">
-        <Link to={`/subaccounts`}>Subaccounts</Link>
-      </Button>
+      <div className="ledgerButtons">
+        <Button type="default">Save Changes</Button>
+        <Button type="default">
+          <Link to={`/subaccounts`}>Subaccounts</Link>
+        </Button>
+      </div>
       <br />
       <br />
       <div className="ledgerContent">
@@ -105,17 +108,32 @@ function Ledger() {
         ) : (
           <p>First you have to select a project from the Projects Menu</p>
         )}
-        {concepts.map((concept, id) => (
-          <div className="concept">
-            <div>{concept.subaccount}</div>
-            <div>{concept.day}</div>
-            <div>{concept.month}</div>
-            <div>{concept.year}</div>
-            <div>{concept.description}</div>
-            <div>{concept.amount}</div>
-            <div>Balance</div>
-          </div>
-        ))}
+        {concepts.length === 0 ? (
+          <p>No concepts to show yet</p>
+        ) : (
+          <table className="concept">
+            <tr>
+              <th>Subaccount</th>
+              <th>Day</th>
+              <th>Month</th>
+              <th>Year</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Balance</th>
+            </tr>
+            {concepts.map((concept, ind) => (
+              <tr key={ind}>
+                <td>{concept.subaccount}</td>
+                <td>{concept.day}</td>
+                <td>{concept.month}</td>
+                <td>{concept.year}</td>
+                <td>{concept.description}</td>
+                <td>{concept.amount}</td>
+                <td>Balance</td>
+              </tr>
+            ))}
+          </table>
+        )}
       </div>
     </div>
   ) : (

@@ -43,6 +43,13 @@ code {
   margin: 1rem;
 }
 
+/* Legder */
+
+.ledgerButtons > Button {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
 .ledgerContent {
   display: flex;
   flex-direction: column;
