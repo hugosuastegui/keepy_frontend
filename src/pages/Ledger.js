@@ -1,15 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Context } from "../context";
-import {
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  Button,
-  Typography,
-  InputNumber,
-} from "antd";
+import ConceptTable from "../components/ConceptTable";
+import { Form, Input, DatePicker, Select, Button, Typography } from "antd";
 import MY_SERVICES from "../services/index";
 
 const { getAllConcepts, getSubaccounts } = MY_SERVICES;
@@ -32,6 +25,7 @@ function Ledger() {
         data: { subaccounts },
       } = await getSubaccounts(project._id);
       setSubaccountItems(subaccounts);
+      console.log(subaccountItems);
     }
     fetchSubaccounts();
     fetchConcepts();
@@ -51,6 +45,10 @@ function Ledger() {
     };
     setConcepts([...concepts, newConcept]);
     form.resetFields();
+  };
+
+  const deleteConcept = (concept) => {
+    console.log(`Delete concept with Id: ${concept.description}`);
   };
 
   return user ? (
@@ -111,28 +109,7 @@ function Ledger() {
         {concepts.length === 0 ? (
           <p>No concepts to show yet</p>
         ) : (
-          <table className="concept">
-            <tr>
-              <th>Subaccount</th>
-              <th>Day</th>
-              <th>Month</th>
-              <th>Year</th>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Balance</th>
-            </tr>
-            {concepts.map((concept, ind) => (
-              <tr key={ind}>
-                <td>{concept.subaccount}</td>
-                <td>{concept.day}</td>
-                <td>{concept.month}</td>
-                <td>{concept.year}</td>
-                <td>{concept.description}</td>
-                <td>{concept.amount}</td>
-                <td>Balance</td>
-              </tr>
-            ))}
-          </table>
+          <ConceptTable concepts={concepts} deleteAction={deleteConcept} />
         )}
       </div>
     </div>
