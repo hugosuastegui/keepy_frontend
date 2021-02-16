@@ -42,3 +42,14 @@ code {
   flex-wrap: wrap;
   margin: 1rem;
 }
+
+.ledgerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.concept > div {
+  margin: 5px;
+  display: inline;
+}
