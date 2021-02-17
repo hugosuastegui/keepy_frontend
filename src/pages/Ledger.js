@@ -89,8 +89,10 @@ function Ledger() {
               </Form.Item>
               <Form.Item name="subaccount">
                 <Select placeholder="Subaccount">
-                  {subaccountItems.map((subaccount, ind) => (
-                    <Option key={subaccount.name}>{subaccount.name}</Option>
+                  {subaccountItems.map((subaccount) => (
+                    <Option key={subaccount._id} value={subaccount.name}>
+                      {subaccount.name}
+                    </Option>
                   ))}
                 </Select>
               </Form.Item>

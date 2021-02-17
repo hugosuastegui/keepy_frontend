@@ -108,7 +108,7 @@ function Subaccounts({ history }) {
           <div className="tagBox">
             {items.length !== 0 ? (
               items.map((tag, ind) => (
-                <Tag key={ind} style={{ margin: "5px" }}>
+                <Tag closable key={ind} style={{ margin: "5px" }}>
                   {tag.name}
                 </Tag>
               ))
