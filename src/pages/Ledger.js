@@ -5,27 +5,29 @@ import ConceptTable from "../components/ConceptTable";
 import { Form, Input, DatePicker, Select, Button, Typography } from "antd";
 import MY_SERVICES from "../services/index";
 
-const { getAllConcepts, getSubaccounts } = MY_SERVICES;
+const { getAllConcepts, getSubaccounts, createConcept } = MY_SERVICES;
 const { Title } = Typography;
 const { Option } = Select;
 
-function Ledger() {
+function Ledger({ history }) {
   const { user, project } = useContext(Context);
   const [subaccountItems, setSubaccountItems] = useState([]);
   const [concepts, setConcepts] = useState([]);
+  const [newConcepts, setNewConcepts] = useState([]);
   const [form] = Form.useForm();
 
   useEffect(() => {
     async function fetchConcepts() {
-      const { data } = await getAllConcepts;
-      console.log(data);
+      const {
+        data: { concepts: fetchedConcepts },
+      } = await getAllConcepts(project._id);
+      setConcepts(fetchedConcepts);
     }
     async function fetchSubaccounts() {
       const {
         data: { subaccounts },
       } = await getSubaccounts(project._id);
       setSubaccountItems(subaccounts);
-      console.log(subaccountItems);
     }
     fetchSubaccounts();
     fetchConcepts();
@@ -44,7 +46,17 @@ function Ledger() {
       subaccount: values.subaccount,
     };
     setConcepts([...concepts, newConcept]);
+    setNewConcepts([...newConcepts, newConcept]);
     form.resetFields();
+  };
+
+  const createAllConcepts = async (array) => {
+    for (let i = 0; i < array.length; i++) {
+      console.log("inside creator");
+      await createConcept(project._id, array[i]);
+    }
+    setNewConcepts([]);
+    // history.push("/brief");
   };
 
   const deleteConcept = (concept) => {
@@ -55,7 +67,9 @@ function Ledger() {
     <div>
       <Title>Ledger</Title>
       <div className="ledgerButtons">
-        <Button type="default">Save Changes</Button>
+        <Button type="default" onClick={() => createAllConcepts(newConcepts)}>
+          Save Changes
+        </Button>
         <Button type="default">
           <Link to={`/subaccounts`}>Subaccounts</Link>
         </Button>

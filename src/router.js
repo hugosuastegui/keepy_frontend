@@ -21,7 +21,7 @@ const router = () => (
         <Route component={Projects} path="/projects" exact />
         <Route component={NewProject} path="/projects/new" exact />
         <Route component={EditProject} path="/projects/:projectId" exact />
-        <Route component={Brief} path="/brief/:projectId" exact />
+        <Route component={Brief} path="/brief" exact />
         <Route component={Ledger} path="/ledger" exact />
         <Route component={Subaccounts} path="/subaccounts" exact />
         <Route component={Profile} path="/profile" exact />
