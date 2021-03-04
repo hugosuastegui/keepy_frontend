@@ -3,6 +3,18 @@ import { Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 function ConceptTable({ concepts, deleteAction }) {
+  const accum = subtotal(concepts, "amount");
+  const balancedConcepts = concepts.map((el, ind) => ({
+    ...el,
+    balance: accum[ind],
+  }));
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "MXN",
+    minimumFractionDigits: 1,
+  });
+
   return (
     <table className="concept">
       <thead>
@@ -17,15 +29,15 @@ function ConceptTable({ concepts, deleteAction }) {
         </tr>
       </thead>
       <tbody>
-        {concepts.map((concept, ind) => (
+        {balancedConcepts.map((concept, ind) => (
           <tr key={ind}>
-            <td>{concept.subaccount}</td>
+            <td>{concept.subaccount.name}</td>
             <td>{concept.day}</td>
             <td>{concept.month}</td>
             <td>{concept.year}</td>
             <td>{concept.description}</td>
-            <td>{concept.amount}</td>
-            <td>Balance</td>
+            <td>{formatter.format(concept.amount)}</td>
+            <td>{formatter.format(concept.balance)}</td>
             <td>
               <Button
                 onClick={() => deleteAction(concept)}
@@ -40,6 +52,19 @@ function ConceptTable({ concepts, deleteAction }) {
       </tbody>
     </table>
   );
+}
+
+function subtotal(array, attr) {
+  let newArray = [];
+  array.forEach((curr, ind) => {
+    if (ind === 0) {
+      newArray.push(curr[attr]);
+    } else {
+      let accum = curr[attr] + newArray[ind - 1];
+      newArray.push(accum);
+    }
+  });
+  return newArray;
 }
 
 export default ConceptTable;

@@ -42,8 +42,8 @@ function Ledger({ history }) {
       day: values.date.format("DD"),
       month: values.date.format("MMM"),
       year: values.date.format("YYYY"),
-      amount: values.amount,
-      subaccount: values.subaccount,
+      amount: parseInt(values.amount, 10),
+      subaccount: { name: values.subaccount },
     };
     setConcepts([...concepts, newConcept]);
     setNewConcepts([...newConcepts, newConcept]);
