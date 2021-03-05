@@ -10,10 +10,10 @@ const { Title } = Typography;
 const { Option } = Select;
 
 function Ledger({ history }) {
+  const [newConcepts, setNewConcepts] = useState([]);
   const { user, project } = useContext(Context);
   const [subaccountItems, setSubaccountItems] = useState([]);
   const [concepts, setConcepts] = useState([]);
-  const [newConcepts, setNewConcepts] = useState([]);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function Ledger({ history }) {
       await createConcept(project._id, array[i]);
     }
     setNewConcepts([]);
-    // history.push("/brief");
+    history.push("/ledger");
   };
 
   const deleteConcept = (concept) => {
@@ -67,9 +67,14 @@ function Ledger({ history }) {
     <div>
       <Title>Ledger</Title>
       <div className="ledgerButtons">
-        <Button type="default" onClick={() => createAllConcepts(newConcepts)}>
-          Save Changes
-        </Button>
+        {newConcepts.length !== 0 ? (
+          <Button type="primary" onClick={() => createAllConcepts(newConcepts)}>
+            Save Changes
+          </Button>
+        ) : (
+          <></>
+        )}
+
         <Button type="default">
           <Link to={`/subaccounts`}>Subaccounts</Link>
         </Button>
