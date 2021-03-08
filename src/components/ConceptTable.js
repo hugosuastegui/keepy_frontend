@@ -29,7 +29,7 @@ function ConceptTable({ concepts, deleteAction }) {
         </tr>
       </thead>
       <tbody>
-        {balancedConcepts.map((concept, ind) => (
+        {balancedConcepts.reverse().map((concept, ind) => (
           <tr key={ind}>
             <td>{concept.subaccount.name}</td>
             <td>{concept.day}</td>
