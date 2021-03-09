@@ -8,9 +8,9 @@ import NewProject from "./pages/NewProject";
 import EditProject from "./pages/EditProject";
 import Ledger from "./pages/Ledger";
 import Subaccounts from "./pages/Subaccounts";
+import Brief from "./pages/Brief";
 
 const Profile = () => <h1>Profile</h1>;
-const Brief = () => <h1>Brief</h1>;
 
 const router = () => (
   <Router>

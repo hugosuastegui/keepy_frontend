@@ -88,3 +88,24 @@ table th {
   background-color: grey;
   color: white;
 }
+
+/* Brief Buttons  */
+
+.main-board {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons > select {
+  height: 30px;
+}
+
+.buttons > button {
+  margin: 5px;
+}
+
+.panel {
+  height: 100px;
+  width: 1000px;
+  background-color: white;
+}
