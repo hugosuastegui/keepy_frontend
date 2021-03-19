@@ -11,7 +11,6 @@ const MY_SERVICES = {
   updateUser: async (userId, user) => {
     return await service.put(`/users/${userId}`, user);
   },
-
   createProject: async (project) => {
     return await service.post("/projects", project);
   },
@@ -50,6 +49,9 @@ const MY_SERVICES = {
   },
   editSubaccount: async (subaccountId, subaccount) => {
     return await service.delete(`/subaccounts/${subaccountId}`, subaccount);
+  },
+  fetchSubtotals: async (projectId, year) => {
+    return await service.get(`/brief/${projectId}/${year}`);
   },
 };
 

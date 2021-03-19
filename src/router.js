@@ -1,6 +1,7 @@
 import React from "react";
 import LayoutApp from "./components/LayoutApp";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Projects from "./pages/Projects";
@@ -10,24 +11,28 @@ import Ledger from "./pages/Ledger";
 import Subaccounts from "./pages/Subaccounts";
 import Brief from "./pages/Brief";
 
+const queryClient = new QueryClient();
+
 const Profile = () => <h1>Profile</h1>;
 
 const router = () => (
-  <Router>
-    <LayoutApp>
-      <Switch>
-        <Route component={Signup} path="/" exact />
-        <Route component={Login} path="/login" exact />
-        <Route component={Projects} path="/projects" exact />
-        <Route component={NewProject} path="/projects/new" exact />
-        <Route component={EditProject} path="/projects/:projectId" exact />
-        <Route component={Brief} path="/brief" exact />
-        <Route component={Ledger} path="/ledger" exact />
-        <Route component={Subaccounts} path="/subaccounts" exact />
-        <Route component={Profile} path="/profile" exact />
-      </Switch>
-    </LayoutApp>
-  </Router>
+  <QueryClientProvider client={queryClient}>
+    <Router>
+      <LayoutApp>
+        <Switch>
+          <Route component={Signup} path="/" exact />
+          <Route component={Login} path="/login" exact />
+          <Route component={Projects} path="/projects" exact />
+          <Route component={NewProject} path="/projects/new" exact />
+          <Route component={EditProject} path="/projects/:projectId" exact />
+          <Route component={Brief} path="/brief" exact />
+          <Route component={Ledger} path="/ledger" exact />
+          <Route component={Subaccounts} path="/subaccounts" exact />
+          <Route component={Profile} path="/profile" exact />
+        </Switch>
+      </LayoutApp>
+    </Router>
+  </QueryClientProvider>
 );
 
 export default router;

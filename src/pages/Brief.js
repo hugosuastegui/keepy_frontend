@@ -1,14 +1,28 @@
 import React, { useState, useContext, useRef } from "react";
+import { useQuery } from "react-query";
 import { Context } from "../context";
+import MY_SERVICES from "../services/index";
+
+const { fetchSubtotals } = MY_SERVICES;
 
 function Brief() {
   const { user, project } = useContext(Context);
   const [year, setYear] = useState(null);
   const yearInput = useRef(null);
 
+  console.log(project);
+  const { data: subtotals, status, refetch } = useQuery(
+    ["subtotals", { project, year }],
+    fetchSubtotals,
+    { enabled: false }
+  );
+
   const submitYear = () => {
     console.log(`click on submit year ${yearInput.current.value}`);
+    setYear(yearInput.current.value);
+    refetch();
   };
+
   return (
     <div>
       <div className="headings">
