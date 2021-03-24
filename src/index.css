@@ -105,8 +105,8 @@ table th {
 }
 
 .tablePanel {
-  height: 100px;
+  height: 300px;
   width: 100%;
   background-color: white;
-  overflow-x: scroll;
+  overflow-x: auto;
 }

@@ -52,7 +52,8 @@ const MY_SERVICES = {
   },
   fetchSubtotals: async ({ queryKey }) => {
     const [_key, { projectId, year }] = queryKey;
-    return await service.get(`/brief/${projectId}/${year}`);
+    const data = await service.get(`/brief/${projectId}/${year}`);
+    return data.data.data;
   },
 };
 
