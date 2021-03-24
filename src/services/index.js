@@ -50,7 +50,8 @@ const MY_SERVICES = {
   editSubaccount: async (subaccountId, subaccount) => {
     return await service.delete(`/subaccounts/${subaccountId}`, subaccount);
   },
-  fetchSubtotals: async (projectId, year) => {
+  fetchSubtotals: async ({ queryKey }) => {
+    const [_key, { projectId, year }] = queryKey;
     return await service.get(`/brief/${projectId}/${year}`);
   },
 };
