@@ -29,14 +29,31 @@ function BriefTable({ data }) {
       <tbody>
         {data &&
           data.map((el) => (
-            <tr key={el.name}>
-              <td key={el.name} className="headcol">
-                {el.name}
-              </td>
-              {el.values.map((val) => (
-                <td key={val.name}>{formatter.format(val)}</td>
+            <>
+              <tr key={el.name}>
+                <td key={el.name} className="headcol">
+                  {el.name}
+                </td>
+                {el.values.map((val) => (
+                  <td key={val}>{formatter.format(val)}</td>
+                ))}
+              </tr>
+              {el.subaccounts.map((subaccount) => (
+                <tr key={subaccount.subaccount}>
+                  <td
+                    key={subaccount.subaccount}
+                    className="headcol subaccount"
+                  >
+                    {subaccount.subaccount}
+                  </td>
+                  {subaccount.values.map((sval) => (
+                    <td key={sval} className="subaccount">
+                      {formatter.format(sval)}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
+            </>
           ))}
       </tbody>
     </table>

@@ -33,11 +33,9 @@ function Brief() {
     <div>
       <div className="headings">
         <h1>{project.name}</h1>
-        {status}
       </div>
       <div className="main-board">
         <div className="buttons">
-          <p>Please select the year:</p>
           <select ref={yearInput} name="Year">
             <option value="2021" defaultValue>
               2021
@@ -48,9 +46,11 @@ function Brief() {
           <button type="submit" onClick={() => submitYear()}>
             Submit
           </button>
-          <div className="tablePanel">
-            <BriefTable data={fecthedData}></BriefTable>
-          </div>
+          <br />
+          <br />
+        </div>
+        <div className="tablePanel">
+          <BriefTable data={fecthedData}></BriefTable>
         </div>
       </div>
     </div>
