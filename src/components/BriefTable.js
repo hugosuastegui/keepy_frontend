@@ -11,7 +11,7 @@ function BriefTable({ data }) {
     <table className="concept">
       <thead>
         <tr>
-          <th>Concept</th>
+          <th className="sticky">Concept</th>
           <th>Jan</th>
           <th>Feb</th>
           <th>Mar</th>
@@ -31,7 +31,7 @@ function BriefTable({ data }) {
           data.map((el) => (
             <>
               <tr key={el.name}>
-                <td key={el.name} className="headcol">
+                <td key={el.name} className="headcol sticky">
                   {el.name}
                 </td>
                 {el.values.map((val) => (
@@ -42,7 +42,7 @@ function BriefTable({ data }) {
                 <tr key={subaccount.subaccount}>
                   <td
                     key={subaccount.subaccount}
-                    className="headcol subaccount"
+                    className="headcol subaccount sticky"
                   >
                     {subaccount.subaccount}
                   </td>

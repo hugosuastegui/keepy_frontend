@@ -89,6 +89,10 @@ table th {
   color: white;
 }
 
+table td {
+  background-color: white;
+}
+
 /* Brief Buttons  */
 
 .main-board {
@@ -112,10 +116,14 @@ table th {
 
 .headcol {
   color: blue;
-  position: relative;
   left: 0;
 }
 
 .subaccount {
   font-size: x-small;
+}
+
+.sticky {
+  position: sticky;
+  left: 0;
 }
