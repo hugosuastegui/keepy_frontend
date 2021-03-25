@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useQuery } from "react-query";
 import { Context } from "../context";
+import BriefTable from "../components/BriefTable";
 import MY_SERVICES from "../services/index";
 
 const { fetchSubtotals } = MY_SERVICES;
@@ -48,34 +49,7 @@ function Brief() {
             Submit
           </button>
           <div className="tablePanel">
-            <table className="PLTable">
-              <tbody>
-                <tr>
-                  <th>Concept</th>
-                  <th>Jan</th>
-                  <th>Feb</th>
-                  <th>Mar</th>
-                  <th>Apr</th>
-                  <th>May</th>
-                  <th>Jun</th>
-                  <th>Jul</th>
-                  <th>Sep</th>
-                  <th>Aug</th>
-                  <th>Oct</th>
-                  <th>Nov</th>
-                  <th>Dec</th>
-                </tr>
-                {fecthedData &&
-                  fecthedData.map((el) => (
-                    <tr key={el.name}>
-                      <td key={el.name}>{el.name}</td>
-                      {el.values.map((val) => (
-                        <td key={val.name}>{val}</td>
-                      ))}
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+            <BriefTable data={fecthedData}></BriefTable>
           </div>
         </div>
       </div>
