@@ -1,11 +1,14 @@
 import React from "react";
 
-function BriefTable({ data }) {
+function BriefTable({ data, status }) {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "MXN",
     minimumFractionDigits: 1,
   });
+
+  console.log(status);
+  console.log(data);
 
   return (
     <table className="concept">
@@ -27,29 +30,22 @@ function BriefTable({ data }) {
         </tr>
       </thead>
       <tbody>
-        {data &&
+        {typeof data !== undefined &&
           data.map((el) => (
             <>
-              <tr key={el.name}>
-                <td key={el.name} className="headcol sticky">
-                  {el.name}
-                </td>
+              <tr>
+                <td className="headcol sticky">{el.name}</td>
                 {el.values.map((val) => (
-                  <td key={val}>{formatter.format(val)}</td>
+                  <td>{formatter.format(val)}</td>
                 ))}
               </tr>
               {el.subaccounts.map((subaccount) => (
-                <tr key={subaccount.subaccount}>
-                  <td
-                    key={subaccount.subaccount}
-                    className="headcol subaccount sticky"
-                  >
+                <tr>
+                  <td className="headcol subaccount sticky">
                     {subaccount.subaccount}
                   </td>
                   {subaccount.values.map((sval) => (
-                    <td key={sval} className="subaccount">
-                      {formatter.format(sval)}
-                    </td>
+                    <td className="subaccount">{formatter.format(sval)}</td>
                   ))}
                 </tr>
               ))}
