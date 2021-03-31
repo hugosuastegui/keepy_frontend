@@ -11,7 +11,7 @@ function BriefTable({ data, status }) {
   console.log(data);
 
   return (
-    <table className="concept">
+    <table>
       <thead>
         <tr>
           <th className="sticky">Concept</th>
@@ -36,7 +36,9 @@ function BriefTable({ data, status }) {
               <tr>
                 <td className="headcol sticky">{el.name}</td>
                 {el.values.map((val) => (
-                  <td>{formatter.format(val)}</td>
+                  <td>
+                    {typeof val === "number" ? formatter.format(val) : val}
+                  </td>
                 ))}
               </tr>
               {el.subaccounts.map((subaccount) => (
@@ -45,7 +47,9 @@ function BriefTable({ data, status }) {
                     {subaccount.subaccount}
                   </td>
                   {subaccount.values.map((sval) => (
-                    <td className="subaccount">{formatter.format(sval)}</td>
+                    <td className="subaccount">
+                      {typeof sval === "number" ? formatter.format(sval) : sval}
+                    </td>
                   ))}
                 </tr>
               ))}

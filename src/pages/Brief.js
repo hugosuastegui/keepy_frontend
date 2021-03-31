@@ -23,24 +23,25 @@ function Brief() {
   };
 
   return (
-    <div>
-      <div className="headings">
-        <h1>{project.name}</h1>
-      </div>
-      <div className="main-board">
-        <div className="buttons">
-          <select ref={yearInput} name="Year">
-            <option value="2021" defaultValue>
-              2021
-            </option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-          </select>
-          <button type="submit" onClick={() => submitYear()}>
-            Submit
-          </button>
-          <br />
-          <br />
+    <div className="briefPage">
+      <h1>{project.name}</h1>
+      <div className="briefBoard">
+        <div className="briefBoardHeadings">
+          <h3 className="briefBoardTitle">P&L</h3>
+          <div className="briefBoardActions">
+            <select ref={yearInput} name="Year" className="primarySelect">
+              <option value="2021" defaultValue>
+                2021
+              </option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+            </select>
+            <button className="primaryButton" onClick={() => submitYear()}>
+              Submit
+            </button>
+            <br />
+            <br />
+          </div>
         </div>
         <div className="tablePanel">
           {typeof data !== "undefined" && (

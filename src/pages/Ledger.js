@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Context } from "../context";
 import ConceptTable from "../components/ConceptTable";
-import { Form, Input, DatePicker, Select, Button, Typography } from "antd";
+import { Form, Input, DatePicker, Select, Button } from "antd";
+
 import MY_SERVICES from "../services/index";
 
 const { getAllConcepts, getSubaccounts, createConcept } = MY_SERVICES;
-const { Title } = Typography;
 const { Option } = Select;
 
 function Ledger({ history }) {
@@ -64,20 +64,20 @@ function Ledger({ history }) {
   };
 
   return user ? (
-    <div>
-      <Title>Ledger</Title>
+    <div className="ledgerPage">
+      <h1>Ledger</h1>
       <div className="ledgerButtons">
-        {newConcepts.length !== 0 ? (
-          <Button type="primary" onClick={() => createAllConcepts(newConcepts)}>
+        {newConcepts.length !== 0 && (
+          <button
+            type="primaryButton"
+            onClick={() => createAllConcepts(newConcepts)}
+          >
             Save Changes
-          </Button>
-        ) : (
-          <></>
+          </button>
         )}
-
-        <Button type="default">
+        <button type="defaultButton">
           <Link to={`/subaccounts`}>Subaccounts</Link>
-        </Button>
+        </button>
       </div>
       <br />
       <br />

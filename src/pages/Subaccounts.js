@@ -42,7 +42,7 @@ function Subaccounts({ history }) {
 
   return (
     <div className="subaccountWindow">
-      <Title>Subaccounts</Title>
+      <h1>Subaccounts</h1>
       <p>
         Subaccounts are ways to classify concepts by type. Ever wondered how
         much money does an item accounts for in your total Revenue? Create a

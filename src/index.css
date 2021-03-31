@@ -1,25 +1,295 @@
 body {
-  margin: 0;
-  text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Courier New", Courier, monospace;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body > div {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1em;
+}
+
+/* Start General */
+.main {
+  font-size: 28px; /* Increased text to enable scrolling */
+  font-family: "Courier New", Courier, monospace;
+  margin: 5% 160px 5% 320px;
+}
+
+.primaryButton {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  margin: 5px;
+}
+
+.secButton {
+  margin: 3px;
+}
+
+.primaryButton a {
+  text-decoration: none;
+  color: white;
+}
+
+.mainButton {
+  font-size: 0.6em;
+}
+
+.defaultButton {
+  background-color: rgb(134, 134, 134);
+  color: black;
+  padding: 5px;
+  margin: 5px;
+}
+
+.primarySelect {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  margin: 5px;
+}
+
+/* End General */
+
+/* Start Landing */
+
+.landingPage {
+  display: flex;
+  font-size: 28px;
+  font-family: "Courier New", Courier, monospace;
+  padding: 10%;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_524578371_138866.jpg");
+}
+
+.landingHeadingMain {
+  font-size: xx-large;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.landingHeadingSec {
+  width: 60%;
+  font-size: medium;
+  margin: 5px;
+}
+
+.landingHeading button {
+  font-size: medium;
+}
+
+.landingPanel {
+  background-color: white;
+  opacity: 0.9;
+  width: 40vw;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.landingPanelButtons {
+  display: flex;
+  justify-content: center;
+  font-size: small;
+}
+
+.signupPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+}
+
+.message {
+  font-size: x-small;
+}
+
+/* End Landing */
+
+/* Start Layout */
+
+.sidenav {
+  height: 100vh;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: scroll;
+  padding-top: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  background: none !important;
+  font-size: 1.2em;
+  color: white;
+  display: block;
+}
+
+.sidenav button {
+  background: none !important;
+  border: none;
+  padding: 6px 8px 6px 16px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.sidenav a.active {
+  font-weight: bold;
+}
+
+.sidenav a:hover {
+  color: #0066ff;
+}
+
+.sidenav button:hover {
+  color: #0066ff;
+}
+
+@media screen and (max-width: 700px) {
+  .sidenav {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+  }
+  .sidenav a {
+    display: inline;
+  }
+  .main {
+    margin: 70px 20px 0px 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
 }
 
 .layout {
-  height: 150vh;
+  height: 100vh;
 }
 
 .selectedProject {
   font-weight: bold;
 }
+
+/* End Layout */
+
+/* Start Projects Page */
+.projectsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.projectCard {
+  background-color: rgb(134, 134, 134);
+  width: 90%;
+  display: flex;
+  font-size: medium;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px auto;
+  color: white;
+}
+
+.projectCardText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 70%;
+}
+
+.projectCardText h4 {
+  text-align: left;
+  font-size: medium;
+  font-weight: bold;
+  color: white;
+}
+
+.projectCardText p {
+  text-align: left;
+  font-size: small;
+}
+
+.projectCardActions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 12%;
+}
+/* End Projects Page*/
+
+/* Start Brief Page */
+
+.briefPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.briefBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: small;
+}
+
+.briefBoardTitle {
+  font-weight: bold;
+}
+
+.briefBoardHeadings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70vw;
+}
+
+.tablePanel {
+  width: 70vw;
+  overflow-x: scroll;
+  border: 1px solid #ddd;
+}
+
+.sticky {
+  position: sticky;
+  left: 0;
+}
+
+/* End Brief Page */
 
 .subaccountWindow {
   display: flex;
@@ -43,7 +313,13 @@ code {
   margin: 1rem;
 }
 
-/* Legder */
+/* Start Legder */
+
+.ledgerPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .ledgerButtons > Button {
   margin-right: 5px;
@@ -63,7 +339,6 @@ code {
 
 table {
   font-family: "Courier New", Courier, monospace;
-  border-collapse: collapse;
   width: 100%;
 }
 
@@ -85,7 +360,7 @@ table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: grey;
+  background-color: black;
   color: white;
 }
 
@@ -93,37 +368,4 @@ table td {
   background-color: white;
 }
 
-/* Brief Buttons  */
-
-.main-board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.buttons > select {
-  height: 30px;
-}
-
-.buttons > button {
-  margin: 5px;
-}
-
-.tablePanel {
-  width: 80%;
-  overflow-x: scroll;
-}
-
-.headcol {
-  color: blue;
-  left: 0;
-}
-
-.subaccount {
-  font-size: x-small;
-}
-
-.sticky {
-  position: sticky;
-  left: 0;
-}
+/* End Legder */

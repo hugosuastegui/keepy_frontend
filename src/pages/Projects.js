@@ -1,21 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../context";
 import { Redirect, Link } from "react-router-dom";
-import { Button, Card, Typography } from "antd";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  SelectOutlined,
-} from "@ant-design/icons";
 
 // Services in page
 import MY_SERVICES from "../services/index";
 import { getCurrentUser } from "../services/auth";
 
 const { deleteProject } = MY_SERVICES;
-
-const { Meta } = Card;
-const { Title } = Typography;
 
 function Projects({ history }) {
   const { user, setCtxProject } = useContext(Context);
@@ -51,35 +42,39 @@ function Projects({ history }) {
   };
 
   return user ? (
-    <div>
-      <Title>Projects List</Title>
-      <Button type="primary">
+    <div className="projectsPage">
+      <h1>Projects List</h1>
+      <button className="primaryButton mainButton">
         <Link to="/projects/new">New project</Link>
-      </Button>
+      </button>
       <br />
-      <br />
-      <div
-        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
-      >
+      <div className="projectList">
         {projectsList.length !== 0 ? (
           projectsList.map((project, ind) => (
-            <Card
-              style={{ width: 300, margin: "10px" }}
+            <div
+              className="projectCard"
               key={ind}
-              actions={[
-                <EditOutlined key="edit" onClick={() => editButton(project)} />,
-                <DeleteOutlined
-                  key="setting"
-                  onClick={() => eraseProject(project, ind)}
-                />,
-                <SelectOutlined
-                  key="select"
-                  onClick={() => selectProject(project)}
-                />,
-              ]}
+              onClick={() => selectProject(project)}
             >
-              <Meta title={project.name} description={project.description} />
-            </Card>
+              <div className="projectCardText">
+                <h4>{project.name}</h4>
+                <p>{project.description}</p>
+              </div>
+              <div className="projectCardActions">
+                <button
+                  className="primaryButton"
+                  onClick={() => editButton(project)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="primaryButton"
+                  onClick={() => eraseProject(project, ind)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           ))
         ) : (
           <p>No projects to show yet, start off by creating a new one</p>
@@ -87,7 +82,7 @@ function Projects({ history }) {
       </div>
     </div>
   ) : (
-    <Redirect to="/login" />
+    <Redirect to="/" />
   );
 }
 
