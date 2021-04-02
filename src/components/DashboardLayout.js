@@ -8,7 +8,7 @@ import "../index.css";
 // } from "@ant-design/icons";
 
 import { Context } from "../context";
-import { login, logout } from "../services/auth";
+import { logout } from "../services/auth";
 
 function DashboardLayout({ children }) {
   const { clearCtxUser, user, project } = useContext(Context);
@@ -25,18 +25,21 @@ function DashboardLayout({ children }) {
       {user && (
         <navbar className="sidenav">
           <Link className="selectedProject" to="/projects">
-            {project ? project.name : "New Project"}
+            {project ? project.name : "My Projects"}
           </Link>
           {project && (
             <>
               <Link to="/brief">Brief</Link>
               <Link to="/ledger">Ledger</Link>
-              <Link to="/profile">Profile</Link>
             </>
           )}
-          <button className="linkButton" onClick={() => logoutProcess()}>
+          <Link to="/profile">Profile</Link>
+          {/* <button className="linkButton" onClick={() => logoutProcess()}>
             Logout
-          </button>
+          </button> */}
+          <Link to="/" onClick={() => logoutProcess()}>
+            Logout
+          </Link>
         </navbar>
       )}
       <div className="main">{children}</div>

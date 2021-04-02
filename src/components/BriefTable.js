@@ -43,11 +43,11 @@ function BriefTable({ data, status }) {
               </tr>
               {el.subaccounts.map((subaccount) => (
                 <tr>
-                  <td className="headcol subaccount sticky">
+                  <td className="headcol briefSubaccount sticky">
                     {subaccount.subaccount}
                   </td>
                   {subaccount.values.map((sval) => (
-                    <td className="subaccount">
+                    <td className="briefSubaccount">
                       {typeof sval === "number" ? formatter.format(sval) : sval}
                     </td>
                   ))}

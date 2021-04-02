@@ -67,71 +67,70 @@ function Ledger({ history }) {
     <div className="ledgerPage">
       <h1>Ledger</h1>
       <div className="ledgerButtons">
-        {newConcepts.length !== 0 && (
-          <button
-            type="primaryButton"
-            onClick={() => createAllConcepts(newConcepts)}
-          >
-            Save Changes
-          </button>
-        )}
-        <button type="defaultButton">
+        <button
+          className={
+            newConcepts.length !== 0
+              ? "primaryButton mainButton"
+              : "secButton mainButton"
+          }
+          onClick={() => createAllConcepts(newConcepts)}
+          disabled={newConcepts.length === 0 ? true : false}
+        >
+          Save Changes
+        </button>
+        <button className="secButton mainButton">
           <Link to={`/subaccounts`}>Subaccounts</Link>
         </button>
       </div>
       <br />
       <br />
-      <div className="ledgerContent">
-        {project ? (
-          <>
-            {project.subaccounts.length === 0 ? (
-              <p>
-                Before you can add any concept yo have to first add Subaccounts
-              </p>
-            ) : (
-              <></>
-            )}
-            <Form
-              name="concept-form"
-              form={form}
-              layout="inline"
-              onFinish={addConcept}
-            >
-              <Form.Item name="description" label="Concept">
-                <Input size="medium" placeholder="Description"></Input>
-              </Form.Item>
-              <Form.Item name="date">
-                <DatePicker />
-              </Form.Item>
-              <Form.Item name="amount">
-                <Input size="medium" placeholder="Amount"></Input>
-              </Form.Item>
-              <Form.Item name="subaccount">
-                <Select placeholder="Subaccount">
-                  {subaccountItems.map((subaccount) => (
-                    <Option key={subaccount._id} value={subaccount.name}>
-                      {subaccount.name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-            <br />
-            <br />
-          </>
-        ) : (
-          <p>First you have to select a project from the Projects Menu</p>
-        )}
-        {concepts.length === 0 ? (
-          <p>No concepts to show yet</p>
-        ) : (
-          <ConceptTable concepts={concepts} deleteAction={deleteConcept} />
-        )}
+      <div className="ledgerBoard">
+        <div>
+          {project.subaccounts.length === 0 && (
+            <p>
+              Before you can add any Concept you have to first add Subaccounts
+            </p>
+          )}
+          <Form
+            name="concept-form"
+            form={form}
+            layout="inline"
+            onFinish={addConcept}
+          >
+            <Form.Item name="subaccount" label="Concept">
+              <Select placeholder="Subaccount">
+                {subaccountItems.map((subaccount) => (
+                  <Option key={subaccount._id} value={subaccount.name}>
+                    {subaccount.name}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item name="description">
+              <Input size="medium" placeholder="Description"></Input>
+            </Form.Item>
+            <Form.Item name="date">
+              <DatePicker />
+            </Form.Item>
+            <Form.Item name="amount">
+              <Input size="medium" placeholder="Amount"></Input>
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+          <br />
+          <br />
+        </div>
+        <div className="tablePanel">
+          {concepts.length === 0 ? (
+            <p>No concepts to show yet</p>
+          ) : (
+            <ConceptTable concepts={concepts} deleteAction={deleteConcept} />
+          )}
+        </div>
       </div>
     </div>
   ) : (

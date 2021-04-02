@@ -41,15 +41,15 @@ function Subaccounts({ history }) {
   };
 
   return (
-    <div className="subaccountWindow">
+    <div className="subaccountsPage">
       <h1>Subaccounts</h1>
-      <p>
+      <p className="subaccountsDescription">
         Subaccounts are ways to classify concepts by type. Ever wondered how
         much money does an item accounts for in your total Revenue? Create a
         Subaccount for that item so you can handle its metrics on the Brief
         section!
       </p>
-      <div className="rowContent">
+      <div className="subaccountsRow">
         <Form
           name="projectForm"
           form={form}
@@ -105,7 +105,7 @@ function Subaccounts({ history }) {
         </Form>
         <div>
           <Title level={5}>Existing subaccounts</Title>
-          <div className="tagBox">
+          <div className="subaccountsTagBox">
             {items.length !== 0 ? (
               items.map((tag, ind) => (
                 <Tag closable key={ind} style={{ margin: "5px" }}>
@@ -118,8 +118,6 @@ function Subaccounts({ history }) {
           </div>
         </div>
       </div>
-      <br />
-      <br />
       <Button
         type="primary"
         onClick={() => createAllsubaccounts(itemsToCreate)}

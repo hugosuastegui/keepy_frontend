@@ -43,7 +43,7 @@ function Projects({ history }) {
 
   return user ? (
     <div className="projectsPage">
-      <h1>Projects List</h1>
+      <h1>My Projects</h1>
       <button className="primaryButton mainButton">
         <Link to="/projects/new">New project</Link>
       </button>

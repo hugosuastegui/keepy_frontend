@@ -12,7 +12,7 @@ function Landing({ history }) {
   return !user ? (
     <div className="landingPage">
       <div className="landingHeading">
-        <div className="logo">Logo</div>
+        <div className="landingLogo">Keepy</div>
         <div className="landingHeadingMain">Keep it simple</div>
         <div className="landingHeadingSec">
           Keepy helps you manage your business seamlessly!

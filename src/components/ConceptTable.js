@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 function ConceptTable({ concepts, deleteAction }) {
@@ -16,22 +15,23 @@ function ConceptTable({ concepts, deleteAction }) {
   });
 
   return (
-    <table className="concept">
+    <table>
       <thead>
         <tr>
-          <th>Subaccount</th>
+          <th className="sticky">Subaccount</th>
           <th>Day</th>
           <th>Month</th>
           <th>Year</th>
           <th>Description</th>
           <th>Amount</th>
           <th>Balance</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
         {balancedConcepts.reverse().map((concept, ind) => (
           <tr key={ind}>
-            <td>{concept.subaccount.name}</td>
+            <td className="headcol sticky">{concept.subaccount.name}</td>
             <td>{concept.day}</td>
             <td>{concept.month}</td>
             <td>{concept.year}</td>
@@ -39,13 +39,9 @@ function ConceptTable({ concepts, deleteAction }) {
             <td>{formatter.format(concept.amount)}</td>
             <td>{formatter.format(concept.balance)}</td>
             <td>
-              <Button
-                onClick={() => deleteAction(concept)}
-                type="danger"
-                size="small"
-              >
+              <button onClick={() => deleteAction(concept)}>
                 <DeleteOutlined />
-              </Button>
+              </button>
             </td>
           </tr>
         ))}

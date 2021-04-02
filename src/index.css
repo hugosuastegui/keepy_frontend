@@ -27,10 +27,18 @@ h1 {
 }
 
 .secButton {
+  background-color: grey;
+  color: white;
+  padding: 3px;
   margin: 3px;
 }
 
 .primaryButton a {
+  text-decoration: none;
+  color: white;
+}
+
+.secButton a {
   text-decoration: none;
   color: white;
 }
@@ -70,7 +78,7 @@ h1 {
 }
 
 .landingHeadingMain {
-  font-size: xx-large;
+  font-size: x-large;
   font-weight: bold;
   margin: 5px;
 }
@@ -122,6 +130,12 @@ h1 {
 
 .message {
   font-size: x-small;
+}
+
+.landingLogo {
+  font-size: xx-large;
+  font-weight: bolder;
+  margin: 5px;
 }
 
 /* End Landing */
@@ -177,6 +191,9 @@ h1 {
     padding: 10px;
   }
   .sidenav a {
+    display: inline;
+  }
+  .sidenav button {
     display: inline;
   }
   .main {
@@ -282,6 +299,7 @@ h1 {
   width: 70vw;
   overflow-x: scroll;
   border: 1px solid #ddd;
+  margin: 10px;
 }
 
 .sticky {
@@ -289,22 +307,36 @@ h1 {
   left: 0;
 }
 
+.briefSubaccount {
+  font-size: x-small;
+}
+
+.briefPanel {
+  width: 70vw;
+  border: 1px solid #ddd;
+  margin: 10px;
+}
+
 /* End Brief Page */
 
-.subaccountWindow {
+.subaccountsPage {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.rowContent {
+.subaccountsDescription {
+  font-size: small;
+}
+
+.subaccountsRow {
   width: 70%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.tagBox {
+.subaccountsTagBox {
   width: 250px;
   display: flex;
   flex-direction: row;
@@ -321,20 +353,11 @@ h1 {
   align-items: center;
 }
 
-.ledgerButtons > Button {
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.ledgerContent {
+.ledgerBoard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.concept > div {
-  margin: 5px;
-  display: inline;
+  align-items: center;
+  font-size: small;
 }
 
 table {
@@ -366,6 +389,7 @@ table th {
 
 table td {
   background-color: white;
+  text-align: center;
 }
 
 /* End Legder */
