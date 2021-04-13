@@ -277,6 +277,10 @@ h1 {
   align-items: center;
 }
 
+.briefPageActions {
+  font-size: small;
+}
+
 .briefBoard {
   display: flex;
   flex-direction: column;
