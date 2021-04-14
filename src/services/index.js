@@ -51,9 +51,14 @@ const MY_SERVICES = {
     return await service.delete(`/subaccounts/${subaccountId}`, subaccount);
   },
   fetchSubtotals: async ({ queryKey }) => {
-    const [_key, { projectId, year }] = queryKey;
-    const data = await service.get(`/brief/${projectId}/${year}`);
+    const [_key, { projectId, years }] = queryKey;
+    const data = await service.get(`/brief/${projectId}/${years[0]}`);
     return data.data.data;
+  },
+  getConceptYears: async ({ queryKey }) => {
+    const [_key, { projectId }] = queryKey;
+    const data = await service.get(`/brief/${projectId}/years`);
+    return data.data.years;
   },
 };
 

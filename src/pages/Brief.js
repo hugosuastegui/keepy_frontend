@@ -1,32 +1,34 @@
 import React, { useState, useContext, useRef } from "react";
 import { useQuery } from "react-query";
 import { Context } from "../context";
-import { Formik, Form, Field } from "formik";
 import BriefTable from "../components/BriefTable";
 import LineGraph from "../components/LineGraph";
 import DoughnutChart from "../components/DoughnutChart";
 import MY_SERVICES from "../services/index";
 
-const { fetchSubtotals } = MY_SERVICES;
+const { fetchSubtotals, getConceptYears } = MY_SERVICES;
 
 function Brief() {
   const { project } = useContext(Context);
-  const [year, setYear] = useState(2021);
   const [metric1, setMetric1] = useState("Revenue");
   const [metric2, setMetric2] = useState("COGS");
 
-  const yearInput = useRef(null);
   const metric1Input = useRef(null);
   const metric2Input = useRef(null);
   const projectId = project._id;
 
+  const { data: years, status: yearsStatus } = useQuery(
+    ["years", { projectId }],
+    getConceptYears
+  );
+
   const { data, status } = useQuery(
-    ["subtotals", { projectId, year }],
+    ["subtotals", { projectId, years }],
     fetchSubtotals
   );
 
   const submitYear = () => {
-    setYear(yearInput.current.value);
+    // setYear(yearInput.current.value);
   };
 
   const submitComparison = () => {
@@ -40,34 +42,10 @@ function Brief() {
     console.log("Inside doughnut chart");
   };
 
-  return (
+  return typeof data !== "undefined" && typeof years !== "undefined" ? (
     <div className="briefPage">
       <h1>{project.name}</h1>
-      <div className="briefPageActions">
-        <select ref={yearInput} name="Year" className="primarySelect">
-          <option value="2021" defaultValue>
-            2021
-          </option>
-          <option value="2020">2020</option>
-          <option value="2019">2019</option>
-        </select>
-        <button className="primaryButton" onClick={() => submitYear()}>
-          Submit
-        </button>
-        <br />
-        <br />
-      </div>
-      {/* P&L */}
-      <div className="briefBoard">
-        <div className="briefBoardHeadings">
-          <h3 className="briefBoardTitle">P&L</h3>
-        </div>
-        <div className="tablePanel">
-          {typeof data !== "undefined" && (
-            <BriefTable data={data} status={status}></BriefTable>
-          )}
-        </div>
-      </div>
+      <div className="briefPageActions"></div>
       {/* Metric Compatison Chart */}
       <div className="briefBoard">
         <div className="briefBoardHeadings">
@@ -144,7 +122,15 @@ function Brief() {
           )}
         </div>
       </div>
+      {/* P&L */}
+      <BriefTable
+        data={data}
+        years={years}
+        selectAction={submitYear}
+      ></BriefTable>
     </div>
+  ) : (
+    <p>Loading...</p>
   );
 }
 
