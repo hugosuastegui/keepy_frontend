@@ -42,8 +42,6 @@ function LineGraph({ data, metric1, metric2, setMetric1, setMetric2 }) {
           <Formik
             initialValues={{ metric1: "Revenue", metric2: "COGS" }}
             onSubmit={async (values, { setSubmitting }) => {
-              console.log(values.metric1);
-              console.log(values.metric2);
               setMetric1(values.metric1);
               setMetric2(values.metric2);
               setSubmitting(false);

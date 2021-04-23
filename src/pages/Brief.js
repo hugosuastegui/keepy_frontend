@@ -12,9 +12,8 @@ function Brief() {
   const { project } = useContext(Context);
   const [metric1, setMetric1] = useState("Revenue");
   const [metric2, setMetric2] = useState("COGS");
+  const [month, setMonth] = useState("Jan");
 
-  const metric1Input = useRef(null);
-  const metric2Input = useRef(null);
   const projectId = project._id;
 
   const { data: years, status: yearsStatus } = useQuery(
@@ -40,44 +39,25 @@ function Brief() {
       <h1>{project.name}</h1>
       <div className="briefPageActions"></div>
       {/* Metric Compatison Chart */}
-      {typeof data !== "undefined" && (
-        <LineGraph
+      <LineGraph
+        data={data}
+        metric1={metric1}
+        metric2={metric2}
+        setMetric1={setMetric1}
+        setMetric2={setMetric2}
+      ></LineGraph>
+      {/* Dougnut Charts */}
+      <div className="doubleChart">
+        <DoughnutChart
           data={data}
-          metric1={metric1}
-          metric2={metric2}
-          setMetric1={setMetric1}
-          setMetric2={setMetric2}
-        ></LineGraph>
-      )}
-      <div className="briefBoard">
-        <div className="briefBoardHeadings">
-          <h3 className="briefBoardTitle">Doughnut Chart for the period</h3>
-          <div className="briefBoardActions">
-            {typeof data !== "undefined" && (
-              <select
-                ref={metric1Input}
-                name="Metric1"
-                className="primarySelect"
-                value={metric1}
-              >
-                {data.map((el) => (
-                  <option value={el.name}>{el.name}</option>
-                ))}
-              </select>
-            )}
-            <button
-              className="primaryButton"
-              onClick={() => submitDoughnutChart()}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-        <div className="briefPanel">
-          {typeof data !== "undefined" && (
-            <DoughnutChart data={data} metric1={metric1}></DoughnutChart>
-          )}
-        </div>
+          month={month}
+          setMonth={setMonth}
+        ></DoughnutChart>
+        <DoughnutChart
+          data={data}
+          month={month}
+          setMonth={setMonth}
+        ></DoughnutChart>
       </div>
       {/* P&L */}
       <BriefTable
