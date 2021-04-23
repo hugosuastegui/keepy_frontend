@@ -31,13 +31,6 @@ function Brief() {
     // setYear(yearInput.current.value);
   };
 
-  const submitComparison = () => {
-    console.log(metric1);
-    console.log(metric2);
-    setMetric1(metric1Input.current.value);
-    setMetric2(metric2Input.current.value);
-  };
-
   const submitDoughnutChart = () => {
     console.log("Inside doughnut chart");
   };
@@ -47,51 +40,15 @@ function Brief() {
       <h1>{project.name}</h1>
       <div className="briefPageActions"></div>
       {/* Metric Compatison Chart */}
-      <div className="briefBoard">
-        <div className="briefBoardHeadings">
-          <h3 className="briefBoardTitle">Metric Comparison Chart</h3>
-          <div className="briefBoardActions">
-            {typeof data !== "undefined" && (
-              <select
-                ref={metric1Input}
-                name="Metric1"
-                className="primarySelect"
-              >
-                {data.map((el) => (
-                  <option value={el.name}>{el.name}</option>
-                ))}
-              </select>
-            )}
-            vs
-            {typeof data !== "undefined" && (
-              <select
-                ref={metric2Input}
-                name="Metric2"
-                className="primarySelect"
-              >
-                {data.map((el) => (
-                  <option value={el.name}>{el.name}</option>
-                ))}
-              </select>
-            )}
-            <button
-              className="primaryButton"
-              onClick={() => submitComparison()}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-        <div className="briefPanel">
-          {typeof data !== "undefined" && (
-            <LineGraph
-              data={data}
-              metric1={metric1}
-              metric2={metric2}
-            ></LineGraph>
-          )}
-        </div>
-      </div>
+      {typeof data !== "undefined" && (
+        <LineGraph
+          data={data}
+          metric1={metric1}
+          metric2={metric2}
+          setMetric1={setMetric1}
+          setMetric2={setMetric2}
+        ></LineGraph>
+      )}
       <div className="briefBoard">
         <div className="briefBoardHeadings">
           <h3 className="briefBoardTitle">Doughnut Chart for the period</h3>
