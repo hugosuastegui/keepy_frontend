@@ -2,50 +2,114 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Formik, Form, Field } from "formik";
 
-function DoughnutChart({ data, metric, month }) {
-  const labels = data.map((account) => {
+function DoughnutChart({ data, month }) {
+  const revenueLabels = data.map((account) => {
     let newArr = [];
-    if (account.name === metric) {
+    if (account.name === "Revenue") {
       newArr = account.subaccounts;
     }
     return newArr;
   });
 
-  const labelData = data.map((account) => {
+  const revenueData = data.map((account) => {
     let newArr = [];
-    if (account.name === metric) {
-      account.name.subaccounts.forEach((el) => {
+    if (account.name === "Revenue") {
+      account.subaccounts.forEach((el) => {
         newArr.push(el.values[month]);
       });
     }
     return newArr;
   });
 
-  console.log(labels);
-  console.log(labelData);
+  const cogsLabels = data.map((account) => {
+    let newArr = [];
+    if (account.name === "COGS") {
+      newArr = account.subaccounts;
+    }
+    return newArr;
+  });
 
-  const graphData = {
-    labels: ["Red", "Blue", "Yellow"],
+  const cogsData = data.map((account) => {
+    let newArr = [];
+    if (account.name === "COGS") {
+      account.subaccounts.forEach((el) => {
+        newArr.push(el.values[month]);
+      });
+    }
+    return newArr;
+  });
+
+  const revenueColors = [
+    "darkgreen",
+    "green",
+    "forestgreen",
+    "seagreen",
+    "mediumseagreen",
+    "mediumspringgreen",
+    "limegreen",
+    "lime",
+    "chartreuse",
+  ];
+
+  const cogsColors = [
+    "darkred",
+    "firebrick",
+    "crimson",
+    "red",
+    "lightsalmon",
+    "darksalmon",
+    "salmon",
+    "lightcoral",
+    "indianred",
+  ];
+
+  console.log("========= REVENUE =========");
+  console.log(revenueLabels);
+  console.log(revenueData);
+  console.log("========= COGS =========");
+  console.log(cogsLabels);
+  console.log(cogsData);
+
+  const graphDataPositive = {
+    labels: ["Red", "Blue", "Yellow", "Orange"],
     datasets: [
       {
         label: "My First Dataset",
-        data: [300, 50, 100],
+        data: [300, 50, 100, 200],
         backgroundColor: [
-          "rgb(255, 99, 132)",
+          "rgb(255, 99, 150)",
           "rgb(54, 162, 235)",
           "rgb(255, 205, 86)",
         ],
         hoverOffset: 4,
       },
     ],
+    responsive: false,
   };
+
+  const graphDataNegative = {
+    labels: ["Red", "Blue", "Yellow", "Orange"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [300, 50, 100, 200],
+        backgroundColor: [
+          "rgb(255, 99, 150)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+    responsive: false,
+  };
+
   return (
     <div className="briefBoard">
       <div className="briefBoardHeadings">
-        <h3 className="briefBoardTitle">Doughnut Chart for the period</h3>
+        <h3 className="briefBoardTitle">Revenue Streams vs COGS Streams</h3>
         <div className="briefBoardActions">
           <Formik
-            initialValues={{ metric1: "Revenue", metric2: "COGS" }}
             onSubmit={async (values, { setSubmitting }) => {
               setSubmitting(false);
             }}
@@ -70,8 +134,21 @@ function DoughnutChart({ data, metric, month }) {
           </Formik>
         </div>
       </div>
-      <div className="briefPanel">
-        <Doughnut data={graphData} />
+      <div className="doubleChart briefPanel">
+        <Doughnut
+          data={graphDataPositive}
+          options={{
+            responsive: false,
+            maintainAspectRatio: true,
+          }}
+        />
+        <Doughnut
+          data={graphDataNegative}
+          options={{
+            responsive: false,
+            maintainAspectRatio: true,
+          }}
+        />
       </div>
     </div>
   );

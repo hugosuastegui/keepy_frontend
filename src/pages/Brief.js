@@ -47,18 +47,12 @@ function Brief() {
         setMetric2={setMetric2}
       ></LineGraph>
       {/* Dougnut Charts */}
-      <div className="doubleChart">
-        <DoughnutChart
-          data={data}
-          month={month}
-          setMonth={setMonth}
-        ></DoughnutChart>
-        <DoughnutChart
-          data={data}
-          month={month}
-          setMonth={setMonth}
-        ></DoughnutChart>
-      </div>
+
+      <DoughnutChart
+        data={data}
+        month={month}
+        setMonth={setMonth}
+      ></DoughnutChart>
       {/* P&L */}
       <BriefTable
         data={data}
