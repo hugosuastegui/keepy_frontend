@@ -12,7 +12,6 @@ function Brief() {
   const { project } = useContext(Context);
   const [metric1, setMetric1] = useState("Revenue");
   const [metric2, setMetric2] = useState("COGS");
-  const [month, setMonth] = useState("Jan");
 
   const projectId = project._id;
 
@@ -47,12 +46,7 @@ function Brief() {
         setMetric2={setMetric2}
       ></LineGraph>
       {/* Dougnut Charts */}
-
-      <DoughnutChart
-        data={data}
-        month={month}
-        setMonth={setMonth}
-      ></DoughnutChart>
+      <DoughnutChart data={data}></DoughnutChart>
       {/* P&L */}
       <BriefTable
         data={data}
