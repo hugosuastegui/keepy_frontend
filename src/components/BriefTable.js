@@ -70,7 +70,7 @@ function BriefTable({ data, years, selectAction }) {
                   <tr>
                     <td className="headcol sticky">{el.name}</td>
                     {el.values.map((val) => (
-                      <td>
+                      <td key={Math.random()}>
                         {typeof val === "number" ? formatter.format(val) : val}
                       </td>
                     ))}

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext } from "react";
 import { useQuery } from "react-query";
 import { Context } from "../context";
 import BriefTable from "../components/BriefTable";
@@ -27,10 +27,6 @@ function Brief() {
 
   const submitYear = () => {
     // setYear(yearInput.current.value);
-  };
-
-  const submitDoughnutChart = () => {
-    console.log("Inside doughnut chart");
   };
 
   return typeof data !== "undefined" && typeof years !== "undefined" ? (

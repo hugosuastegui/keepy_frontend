@@ -87,15 +87,61 @@ function DoughnutChart({ data }) {
         <h3 className="briefBoardTitle">Revenue Streams vs COGS Mix</h3>
         <div className="briefBoardActions">
           <Formik
+            initialValues={{ month: "Jan" }}
             onSubmit={async (values, { setSubmitting }) => {
-              console.log(values.month);
-              setMonth(values.month);
+              let passthruValue;
+              switch (values.month) {
+                case "Jan":
+                  passthruValue = 0;
+                  break;
+                case "Feb":
+                  passthruValue = 1;
+                  break;
+                case "Mar":
+                  passthruValue = 2;
+                  break;
+                case "Apr":
+                  passthruValue = 3;
+                  break;
+                case "May":
+                  passthruValue = 4;
+                  break;
+                case "Jun":
+                  passthruValue = 5;
+                  break;
+                case "Jul":
+                  passthruValue = 6;
+                  break;
+                case "Aug":
+                  passthruValue = 7;
+                  break;
+                case "Sep":
+                  passthruValue = 8;
+                  break;
+                case "Oct":
+                  passthruValue = 9;
+                  break;
+                case "Nov":
+                  passthruValue = 10;
+                  break;
+                case "Dec":
+                  passthruValue = 11;
+                  break;
+                default:
+                  break;
+              }
+              // setMonth(passthruValue);
+              console.log(passthruValue);
               setSubmitting(false);
             }}
           >
             {({ isSubmitting }) => (
               <Form>
-                <Field as="select" name="month" className="primarySelect">
+                <Field
+                  component="select"
+                  name="month"
+                  className="primarySelect"
+                >
                   <option value={0}>Jan</option>
                   <option value={1}>Feb</option>
                   <option value={2}>Mar</option>
@@ -122,20 +168,28 @@ function DoughnutChart({ data }) {
         </div>
       </div>
       <div className="doubleChart briefPanel">
-        <Doughnut
-          data={graphDataPositive}
-          options={{
-            responsive: false,
-            maintainAspectRatio: true,
-          }}
-        />
-        <Doughnut
-          data={graphDataNegative}
-          options={{
-            responsive: false,
-            maintainAspectRatio: true,
-          }}
-        />
+        {revenueLabels.length !== 0 ? (
+          <Doughnut
+            data={graphDataPositive}
+            options={{
+              responsive: false,
+              maintainAspectRatio: true,
+            }}
+          />
+        ) : (
+          <p>Insufficient Data to show insights</p>
+        )}
+        {cogsLabels.length !== 0 ? (
+          <Doughnut
+            data={graphDataNegative}
+            options={{
+              responsive: false,
+              maintainAspectRatio: true,
+            }}
+          />
+        ) : (
+          <p>Insufficient Data to show insights</p>
+        )}
       </div>
     </div>
   );
