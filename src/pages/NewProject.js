@@ -13,7 +13,6 @@ function NewProject({ history }) {
   const [form] = Form.useForm();
 
   const newProject = async (values) => {
-    console.log(values);
     await createProject(values);
     history.push("/projects");
   };

@@ -3,7 +3,7 @@ import { Doughnut } from "react-chartjs-2";
 import { Formik, Form, Field } from "formik";
 
 function DoughnutChart({ data }) {
-  const [month, setMonth] = useState(0);
+  const [month, setMonth] = useState(new Date().getMonth());
 
   const [{ subaccounts: revenueSubaccounts }] = data.filter(
     (account) => account.name === "Revenue"
@@ -48,13 +48,6 @@ function DoughnutChart({ data }) {
     "indianred",
   ];
 
-  console.log("========= REVENUE =========");
-  console.log(revenueLabels);
-  console.log(revenueData);
-  console.log("========= COGS =========");
-  console.log(cogsLabels);
-  console.log(cogsData);
-
   const graphDataPositive = {
     labels: revenueLabels,
     datasets: [
@@ -87,51 +80,9 @@ function DoughnutChart({ data }) {
         <h3 className="briefBoardTitle">Revenue Streams vs COGS Mix</h3>
         <div className="briefBoardActions">
           <Formik
-            initialValues={{ month: "Jan" }}
+            initialValues={{ month: new Date().getMonth() }}
             onSubmit={async (values, { setSubmitting }) => {
-              let passthruValue;
-              switch (values.month) {
-                case "Jan":
-                  passthruValue = 0;
-                  break;
-                case "Feb":
-                  passthruValue = 1;
-                  break;
-                case "Mar":
-                  passthruValue = 2;
-                  break;
-                case "Apr":
-                  passthruValue = 3;
-                  break;
-                case "May":
-                  passthruValue = 4;
-                  break;
-                case "Jun":
-                  passthruValue = 5;
-                  break;
-                case "Jul":
-                  passthruValue = 6;
-                  break;
-                case "Aug":
-                  passthruValue = 7;
-                  break;
-                case "Sep":
-                  passthruValue = 8;
-                  break;
-                case "Oct":
-                  passthruValue = 9;
-                  break;
-                case "Nov":
-                  passthruValue = 10;
-                  break;
-                case "Dec":
-                  passthruValue = 11;
-                  break;
-                default:
-                  break;
-              }
-              // setMonth(passthruValue);
-              console.log(passthruValue);
+              setMonth(values.month);
               setSubmitting(false);
             }}
           >

@@ -31,12 +31,10 @@ function DashboardLayout({ children }) {
             <>
               <Link to="/brief">Brief</Link>
               <Link to="/ledger">Ledger</Link>
+              <Link to="/ledger">KPIs</Link>
             </>
           )}
           <Link to="/profile">Profile</Link>
-          {/* <button className="linkButton" onClick={() => logoutProcess()}>
-            Logout
-          </button> */}
           <Link to="/" onClick={() => logoutProcess()}>
             Logout
           </Link>

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../context";
 import MY_SERVICES from "../services/index";
 import { Form, Input, Radio, Button, Typography, Tag } from "antd";
+import { Redirect } from "react-router";
 
 const { getSubaccounts, createSubaccount } = MY_SERVICES;
 const { Title } = Typography;
@@ -9,7 +10,7 @@ const { Title } = Typography;
 function Subaccounts({ history }) {
   const [items, setItems] = useState([]);
   const [itemsToCreate, setitemsToCreate] = useState([]);
-  const { project } = useContext(Context);
+  const { user, project } = useContext(Context);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function Subaccounts({ history }) {
     history.goBack();
   };
 
-  return (
+  return user ? (
     <div className="subaccountsPage">
       <h1>Subaccounts</h1>
       <p className="subaccountsDescription">
@@ -125,6 +126,8 @@ function Subaccounts({ history }) {
         Save Changes
       </Button>
     </div>
+  ) : (
+    <Redirect to="/"></Redirect>
   );
 }
 

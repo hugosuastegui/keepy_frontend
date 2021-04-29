@@ -8,8 +8,6 @@ function BriefTable({ data, years, selectAction }) {
     minimumFractionDigits: 1,
   });
 
-  console.log(years[0]);
-
   return (
     <div className="briefBoard">
       <div className="briefBoardHeadings">
@@ -20,8 +18,7 @@ function BriefTable({ data, years, selectAction }) {
               year: years[0],
             }}
             onSubmit={async (values, { setSubmitting }) => {
-              console.log(values.year);
-              // selectAction(values);
+              selectAction(values.year);
               setSubmitting(false);
             }}
           >

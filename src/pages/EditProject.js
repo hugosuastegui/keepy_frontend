@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../context";
+import { Redirect } from "react-router-dom";
 import { Form, Input, Select, Button, Typography } from "antd";
 import MY_SERVICES from "../services";
 
@@ -14,6 +16,7 @@ function EditProject({
 }) {
   const [projectItem, setProjectItem] = useState(null);
   const [form] = Form.useForm();
+  const { user } = useContext(Context);
 
   useEffect(() => {
     async function fetchInfo() {
@@ -26,12 +29,11 @@ function EditProject({
   }, []);
 
   const editProject = async (values) => {
-    console.log(projectId, values);
     await updateProject(projectId, values);
     history.push("/projects");
   };
 
-  return (
+  return user ? (
     projectItem && (
       <div>
         <Title>Edit</Title>
@@ -86,6 +88,8 @@ function EditProject({
         </Form>
       </div>
     )
+  ) : (
+    <Redirect to="/"></Redirect>
   );
 }
 

@@ -11,10 +11,9 @@ import EditProject from "./pages/EditProject";
 import Ledger from "./pages/Ledger";
 import Subaccounts from "./pages/Subaccounts";
 import Brief from "./pages/Brief";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
-
-const Profile = () => <h1>Profile</h1>;
 
 const router = () => (
   <QueryClientProvider client={queryClient}>

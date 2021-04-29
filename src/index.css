@@ -214,6 +214,8 @@ h1 {
 
 .selectedProject {
   font-weight: bold;
+  border: 1px solid white;
+  margin: 0px 10px 0px 10px;
 }
 
 /* End Layout */
@@ -240,6 +242,7 @@ h1 {
   padding: 10px;
   margin: 5px auto;
   color: white;
+  cursor: pointer;
 }
 
 .projectCardText {
@@ -266,6 +269,20 @@ h1 {
   flex-direction: column;
   justify-content: space-around;
   width: 12%;
+}
+
+@media screen and (max-width: 400px) {
+  .projectCard {
+    flex-direction: column;
+    align-items: center;
+  }
+  .projectCardActions {
+    flex-direction: row;
+  }
+  .projectCardText {
+    align-items: center;
+    width: 90%;
+  }
 }
 /* End Projects Page*/
 
@@ -324,9 +341,23 @@ h1 {
 .doubleChart {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
   width: 70vw;
+}
+
+.doubleChart > * {
+  margin: 10px;
+}
+
+@media screen and (max-width: 700px) {
+  .doubleChart {
+    flex-direction: column;
+    align-items: center;
+  }
+  .briefBoardHeadings {
+    flex-direction: column;
+  }
 }
 /* End Brief Page */
 

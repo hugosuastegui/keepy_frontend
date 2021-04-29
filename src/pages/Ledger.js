@@ -52,7 +52,6 @@ function Ledger({ history }) {
 
   const createAllConcepts = async (array) => {
     for (let i = 0; i < array.length; i++) {
-      console.log("inside creator");
       await createConcept(project._id, array[i]);
     }
     setNewConcepts([]);
@@ -134,7 +133,7 @@ function Ledger({ history }) {
       </div>
     </div>
   ) : (
-    <Redirect to="/login"></Redirect>
+    <Redirect to="/"></Redirect>
   );
 }
 

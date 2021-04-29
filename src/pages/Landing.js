@@ -135,10 +135,7 @@ function Landing({ history }) {
               }}
               onSubmit={async (values, { setSubmitting }) => {
                 const response = await login(values);
-                console.log("-------- RESPONSE --------");
-                console.log(response);
                 if (response.message) {
-                  console.log("message defined");
                   setMessage(response.message);
                   setSubmitting(false);
                 } else {

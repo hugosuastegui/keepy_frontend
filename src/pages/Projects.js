@@ -30,7 +30,6 @@ function Projects({ history }) {
   };
 
   const selectProject = async (project) => {
-    console.log(`Selected project: ${project.name}`);
     setCtxProject(project);
   };
 
