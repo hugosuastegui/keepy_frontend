@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { HorizontalBar, Bar } from "react-chartjs-2";
 import { Formik, Form, Field } from "formik";
 
-function DoughnutChart({ data }) {
+function HorizontalBarChart({ data }) {
   const [month, setMonth] = useState(new Date().getMonth());
 
   const [{ subaccounts: revenueSubaccounts }] = data.filter(
@@ -49,12 +49,18 @@ function DoughnutChart({ data }) {
   ];
 
   const graphDataPositive = {
-    labels: revenueLabels,
+    labels: ["COGS Mix", "Revenue Mix"],
     datasets: [
       {
-        label: "Revenue Streams",
+        label: revenueLabels,
         data: revenueData,
         backgroundColor: revenueColors,
+        hoverOffset: 4,
+      },
+      {
+        label: cogsLabels,
+        data: cogsData,
+        backgroundColor: cogsColors,
         hoverOffset: 4,
       },
     ],
@@ -74,26 +80,34 @@ function DoughnutChart({ data }) {
     responsive: false,
   };
 
-  const chartOptions = {
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      callbacks: {
-        label: function (tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          var meta = dataset._meta[Object.keys(dataset._meta)[0]];
-          var total = meta.total;
-          var currentValue = dataset.data[tooltipItem.index];
-          var percentage = parseFloat(
-            ((currentValue / total) * 100).toFixed(1)
-          );
-          return currentValue + " (" + percentage + "%)";
-        },
-        title: function (tooltipItem, data) {
-          return data.labels[tooltipItem[0].index];
-        },
+  const data2 = {
+    labels: ["Revenue Mix"],
+    datasets: [
+      {
+        label: "# of Red Votes",
+        data: [12],
+        backgroundColor: "rgb(255, 99, 132)",
       },
+      {
+        label: "# of Blue Votes",
+        data: [2],
+        backgroundColor: "rgb(54, 162, 235)",
+      },
+      {
+        label: "# of Green Votes",
+        data: [3],
+        backgroundColor: "rgb(75, 192, 192)",
+      },
+    ],
+  };
+
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          stacked: true,
+        },
+      ],
     },
   };
 
@@ -141,26 +155,15 @@ function DoughnutChart({ data }) {
           </Formik>
         </div>
       </div>
-      <div className="doubleChart">
-        <div className="doughnutContainer ">
-          <h3 className="briefBoardSecondTitle">Revenue Mix</h3>
-          {revenueLabels.length !== 0 ? (
-            <Doughnut data={graphDataPositive} options={chartOptions} />
-          ) : (
-            <p>Insufficient Data to show insights</p>
-          )}
-        </div>
-        <div className="doughnutContainer ">
-          <h3 className="briefBoardSecondTitle">COGS Mix</h3>
-          {cogsLabels.length !== 0 ? (
-            <Doughnut data={graphDataNegative} options={chartOptions} />
-          ) : (
-            <p>Insufficient Data to show insights</p>
-          )}
-        </div>
+      <div className="briefPanel">
+        {revenueLabels.length !== 0 ? (
+          <HorizontalBar data={data2} options={options} />
+        ) : (
+          <p>Insufficient Data to show insights</p>
+        )}
       </div>
     </div>
   );
 }
 
-export default DoughnutChart;
+export default HorizontalBarChart;

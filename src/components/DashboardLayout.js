@@ -31,7 +31,7 @@ function DashboardLayout({ children }) {
             <>
               <Link to="/brief">Brief</Link>
               <Link to="/ledger">Ledger</Link>
-              <Link to="/ledger">KPIs</Link>
+              <Link to="/ledger">KPI</Link>
             </>
           )}
           <Link to="/profile">Profile</Link>

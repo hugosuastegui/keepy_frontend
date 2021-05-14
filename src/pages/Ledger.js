@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import { Context } from "../context";
 import ConceptTable from "../components/ConceptTable";
 import { Form, Input, DatePicker, Select, Button } from "antd";
+import ConceptForm from "../components/ConceptForm";
 
 import MY_SERVICES from "../services/index";
 
@@ -31,6 +32,7 @@ function Ledger({ history }) {
     }
     fetchSubaccounts();
     fetchConcepts();
+    console.log(subaccountItems);
     return () => {
       return null;
     };
@@ -122,6 +124,9 @@ function Ledger({ history }) {
           </Form>
           <br />
           <br />
+        </div>
+        <div>
+          <ConceptForm subaccountItems={subaccountItems} />
         </div>
         <div className="tablePanel">
           {concepts.length === 0 ? (
