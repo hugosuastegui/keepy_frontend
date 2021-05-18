@@ -1,71 +1,29 @@
-import React from "react";
-import { Formik, Form, Field } from "formik";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import SelectSearch from "react-select-search";
+import Select from "react-select";
+import "react-datepicker/dist/react-datepicker.css";
 
-function conceptForm({ subaccountItems }) {
+function ConceptForm({ subaccountItems }) {
+  const [date, setDate] = useState(new Date());
+
+  const options = [
+    {
+      label: "Group 1",
+      options: [
+        { label: "Group 1, option 1", value: "value_1" },
+        { label: "Group 1, option 2", value: "value_2" },
+      ],
+    },
+    { label: "A root option", value: "value_3" },
+    { label: "Another root option", value: "value_4" },
+  ];
+
   return (
     <div>
-      <SelectSearch
-        options={[
-          {
-            name: "Food",
-            type: "group",
-            items: [
-              {
-                value: "hamburger",
-                name: "Hamburger",
-              },
-              {
-                value: "pizza",
-                name: "Pizza",
-              },
-            ],
-          },
-          {
-            name: "Drinks",
-            type: "group",
-            items: [
-              {
-                value: "soft",
-                name: "Soft drink",
-              },
-              {
-                value: "beer",
-                name: "Beer",
-              },
-            ],
-          },
-        ]}
-      />
-      <Formik
-        initialValues={{ date: new Date() }}
-        onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
-          //   addConcept();
-          setSubmitting(false);
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <Field
-              component="select"
-              name="subaccount"
-              className="primarySelect"
-            ></Field>
-            <Field name="date">{/* <DatePicker /> */}</Field>
-            <button
-              className="primaryButton"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              Submit
-            </button>
-          </Form>
-        )}
-      </Formik>
+      <Select options={options} />
+      <DatePicker selected={date} onChange={(date) => setDate(date)} />
     </div>
   );
 }
 
-export default conceptForm;
+export default ConceptForm;

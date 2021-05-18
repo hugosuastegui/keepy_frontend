@@ -125,9 +125,7 @@ function Ledger({ history }) {
           <br />
           <br />
         </div>
-        <div>
-          <ConceptForm subaccountItems={subaccountItems} />
-        </div>
+        <div>{/* <ConceptForm subaccountItems={subaccountItems} /> */}</div>
         <div className="tablePanel">
           {concepts.length === 0 ? (
             <p>No concepts to show yet</p>
