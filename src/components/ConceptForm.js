@@ -34,31 +34,47 @@ function ConceptForm({ subaccountItems }) {
     <div className="conceptFormContainer">
       <h3>New Concept</h3>
       <form>
-        <label>Subaccount</label>
-        <input name="subaccount" list="brow" onChange={handleChange} />
-        <datalist id="brow">
-          <option value="Internet Explorer" />
-          <option value="Firefox" />
-          <option value="Chrome" />
-          <option value="Opera" />
-          <option value="Safari" />
-        </datalist>
-        <label>Date</label>
-        <input name="date" type="date" onChange={handleChange} />
-        <label>Description</label>
-        <input
-          type="text"
-          name="description"
-          onChange={handleChange}
-          placeholder="Description"
-        />
-        <label>Amount</label>
-        <input
-          type="number"
-          name="amount"
-          onChange={handleChange}
-          placeholder="Amount"
-        />
+        <div className="conceptForm">
+          <div className="concepField">
+            <label>Subaccount</label>
+            <input name="subaccount" list="brow" onChange={handleChange} />
+            <datalist id="brow">
+              <option value="Internet Explorer" />
+              <option value="Firefox" />
+              <option value="Chrome" />
+              <option value="Opera" />
+              <option value="Safari" />
+            </datalist>
+          </div>
+          <div className="concepField">
+            <label>Date</label>
+            <input
+              style={{ width: "auto" }}
+              name="date"
+              type="date"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="concepField">
+            <label>Description</label>
+            <input
+              type="text"
+              name="description"
+              onChange={handleChange}
+              placeholder="Description"
+            />
+          </div>
+          <div className="concepField">
+            <label>Amount</label>
+            <input
+              type="number"
+              name="amount"
+              style={{ width: "100px" }}
+              onChange={handleChange}
+              placeholder="Amount"
+            />
+          </div>
+        </div>
         <button type="button" onClick={handleSubmit}>
           Submit
         </button>

@@ -456,8 +456,19 @@ table td {
   padding: 10px;
 }
 
-.conceptFormContainer > form > label {
-  margin-right: 5px;
+.conceptForm {
+  display: flex;
+  flex-direction: row;
 }
+
+.conceptField {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+/* div.conceptField > input {
+  width: 10px;
+} */
 
 /* End Legder */
