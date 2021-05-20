@@ -1,27 +1,68 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import Select from "react-select";
-import "react-datepicker/dist/react-datepicker.css";
 
 function ConceptForm({ subaccountItems }) {
-  const [date, setDate] = useState(new Date());
+  const [form, setForm] = useState({
+    subaccount: "",
+    date: new Date(),
+    description: "",
+    amount: null,
+  });
 
-  const options = [
-    {
-      label: "Group 1",
-      options: [
-        { label: "Group 1, option 1", value: "value_1" },
-        { label: "Group 1, option 2", value: "value_2" },
-      ],
-    },
-    { label: "A root option", value: "value_3" },
-    { label: "Another root option", value: "value_4" },
-  ];
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setForm({
+      ...form,
+      [event.target.name]: value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newDate = new Date(form.date);
+    const newConcept = {
+      description: form.description,
+      day: newDate.toLocaleString("default", { day: "2-digit" }),
+      month: newDate.toLocaleString("default", { month: "short" }),
+      year: newDate.toLocaleString("default", { year: "numeric" }),
+      amount: parseInt(form.amount, 10),
+      subaccount: { name: form.subaccount },
+    };
+    console.log(newConcept);
+  };
 
   return (
-    <div>
-      <Select options={options} />
-      <DatePicker selected={date} onChange={(date) => setDate(date)} />
+    <div className="conceptFormContainer">
+      <h3>New Concept</h3>
+      <form>
+        <label>Subaccount</label>
+        <input name="subaccount" list="brow" onChange={handleChange} />
+        <datalist id="brow">
+          <option value="Internet Explorer" />
+          <option value="Firefox" />
+          <option value="Chrome" />
+          <option value="Opera" />
+          <option value="Safari" />
+        </datalist>
+        <label>Date</label>
+        <input name="date" type="date" onChange={handleChange} />
+        <label>Description</label>
+        <input
+          type="text"
+          name="description"
+          onChange={handleChange}
+          placeholder="Description"
+        />
+        <label>Amount</label>
+        <input
+          type="number"
+          name="amount"
+          onChange={handleChange}
+          placeholder="Amount"
+        />
+        <button type="button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 }

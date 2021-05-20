@@ -448,4 +448,16 @@ table td {
   text-align: center;
 }
 
+.conceptFormContainer {
+  background-color: lightgray;
+  border-radius: 5px;
+  width: 100%;
+  font-size: medium;
+  padding: 10px;
+}
+
+.conceptFormContainer > form > label {
+  margin-right: 5px;
+}
+
 /* End Legder */
