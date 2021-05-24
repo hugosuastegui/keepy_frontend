@@ -1,55 +1,32 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
+import { useQuery } from "react-query";
 import { Redirect, Link } from "react-router-dom";
 import { Context } from "../context";
 import ConceptTable from "../components/ConceptTable";
-import { Form, Input, DatePicker, Select, Button } from "antd";
 import ConceptForm from "../components/ConceptForm";
 
 import MY_SERVICES from "../services/index";
 
 const { getAllConcepts, getSubaccounts, createConcept } = MY_SERVICES;
-const { Option } = Select;
 
 function Ledger({ history }) {
+  const { project, user } = useContext(Context);
   const [newConcepts, setNewConcepts] = useState([]);
-  const { user, project } = useContext(Context);
-  const [subaccountItems, setSubaccountItems] = useState([]);
-  const [concepts, setConcepts] = useState([]);
-  const [form] = Form.useForm();
 
-  useEffect(() => {
-    async function fetchConcepts() {
-      const {
-        data: { concepts: fetchedConcepts },
-      } = await getAllConcepts(project._id);
-      setConcepts(fetchedConcepts);
-    }
-    async function fetchSubaccounts() {
-      const {
-        data: { subaccounts },
-      } = await getSubaccounts(project._id);
-      setSubaccountItems(subaccounts);
-    }
-    fetchSubaccounts();
-    fetchConcepts();
-    console.log(subaccountItems);
-    return () => {
-      return null;
-    };
-  }, [project]);
+  const projectId = project._id;
 
-  const addConcept = (values) => {
-    const newConcept = {
-      description: values.description,
-      day: values.date.format("DD"),
-      month: values.date.format("MMM"),
-      year: values.date.format("YYYY"),
-      amount: parseInt(values.amount, 10),
-      subaccount: { name: values.subaccount },
-    };
-    setConcepts([...concepts, newConcept]);
+  const { data: concepts, status: conceptsStatus } = useQuery(
+    ["concepts", { projectId }],
+    getAllConcepts
+  );
+
+  const { data: subaccountItems, status: subaccountItemsStatus } = useQuery(
+    ["subaccounts", { projectId }],
+    getSubaccounts
+  );
+
+  const addConcept = (newConcept) => {
     setNewConcepts([...newConcepts, newConcept]);
-    form.resetFields();
   };
 
   const createAllConcepts = async (array) => {
@@ -84,51 +61,22 @@ function Ledger({ history }) {
         </button>
       </div>
       <br />
-      <br />
       <div className="ledgerBoard">
-        <div>
-          {project.subaccounts.length === 0 && (
-            <p>
-              Before you can add any Concept you have to first add Subaccounts
-            </p>
+        <div style={{ width: "90%" }}>
+          {subaccountItemsStatus !== "success" ? (
+            <p>{subaccountItemsStatus}</p>
+          ) : (
+            <ConceptForm
+              subaccountItems={subaccountItems}
+              addConcept={addConcept}
+            />
           )}
-          <Form
-            name="concept-form"
-            form={form}
-            layout="inline"
-            onFinish={addConcept}
-          >
-            <Form.Item name="subaccount" label="Concept">
-              <Select placeholder="Subaccount">
-                {subaccountItems.map((subaccount) => (
-                  <Option key={subaccount._id} value={subaccount.name}>
-                    {subaccount.name}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item name="description">
-              <Input size="medium" placeholder="Description"></Input>
-            </Form.Item>
-            <Form.Item name="date">
-              <DatePicker />
-            </Form.Item>
-            <Form.Item name="amount">
-              <Input size="medium" placeholder="Amount"></Input>
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
-          <br />
           <br />
         </div>
         <div>{/* <ConceptForm subaccountItems={subaccountItems} /> */}</div>
         <div className="tablePanel">
-          {concepts.length === 0 ? (
-            <p>No concepts to show yet</p>
+          {conceptsStatus !== "success" ? (
+            <p>{conceptsStatus}</p>
           ) : (
             <ConceptTable concepts={concepts} deleteAction={deleteConcept} />
           )}

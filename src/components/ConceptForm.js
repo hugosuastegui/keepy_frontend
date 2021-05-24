@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-function ConceptForm({ subaccountItems }) {
+function ConceptForm({ subaccountItems, addConcept }) {
+  const internalDate = new Date();
   const [form, setForm] = useState({
     subaccount: "",
-    date: new Date(),
+    date: internalDate,
     description: "",
     amount: null,
   });
@@ -19,6 +20,7 @@ function ConceptForm({ subaccountItems }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newDate = new Date(form.date);
+    newDate.setDate(newDate.getDate() + 1);
     const newConcept = {
       description: form.description,
       day: newDate.toLocaleString("default", { day: "2-digit" }),
@@ -28,25 +30,15 @@ function ConceptForm({ subaccountItems }) {
       subaccount: { name: form.subaccount },
     };
     console.log(newConcept);
+    addConcept(newConcept);
   };
 
   return (
     <div className="conceptFormContainer">
-      <h3>New Concept</h3>
+      <h3 style={{ fontWeight: "bold" }}>New Concept</h3>
       <form>
         <div className="conceptForm">
-          <div className="concepField">
-            <label>Subaccount</label>
-            <input name="subaccount" list="brow" onChange={handleChange} />
-            <datalist id="brow">
-              <option value="Internet Explorer" />
-              <option value="Firefox" />
-              <option value="Chrome" />
-              <option value="Opera" />
-              <option value="Safari" />
-            </datalist>
-          </div>
-          <div className="concepField">
+          <div className="conceptField" style={{ width: "30%" }}>
             <label>Date</label>
             <input
               style={{ width: "auto" }}
@@ -55,7 +47,24 @@ function ConceptForm({ subaccountItems }) {
               onChange={handleChange}
             />
           </div>
-          <div className="concepField">
+          <div
+            className="conceptField"
+            style={{ width: "70%", margin: "0px 0px 0px 5px" }}
+          >
+            <label>Subaccount</label>
+            <input name="subaccount" list="brow" onChange={handleChange} />
+            <datalist id="brow">
+              {subaccountItems.map((subaccount) => (
+                <option value={subaccount.name} />
+              ))}
+            </datalist>
+          </div>
+        </div>
+        <div className="conceptForm">
+          <div
+            className="conceptField"
+            style={{ width: "100%", margin: "0px 5px 0px 0px" }}
+          >
             <label>Description</label>
             <input
               type="text"
@@ -64,7 +73,7 @@ function ConceptForm({ subaccountItems }) {
               placeholder="Description"
             />
           </div>
-          <div className="concepField">
+          <div className="conceptField" style={{ width: "auto" }}>
             <label>Amount</label>
             <input
               type="number"

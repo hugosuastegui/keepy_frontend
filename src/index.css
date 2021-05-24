@@ -448,6 +448,8 @@ table td {
   text-align: center;
 }
 
+/* Concept Form */
+
 .conceptFormContainer {
   background-color: lightgray;
   border-radius: 5px;
@@ -459,16 +461,18 @@ table td {
 .conceptForm {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .conceptField {
   display: flex;
   flex-direction: column;
-  justify-content: left;
 }
 
-/* div.conceptField > input {
-  width: 10px;
-} */
+.conceptFormContainer > form > button {
+  margin-top: 5px;
+  background-color: black;
+  color: white;
+}
 
 /* End Legder */

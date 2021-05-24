@@ -4,7 +4,7 @@ import { Context } from "../context";
 import BriefTable from "../components/BriefTable";
 import LineGraph from "../components/LineGraph";
 import DoughnutChart from "../components/DoughnutChart";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import MY_SERVICES from "../services/index";
 
 const { fetchSubtotals, getConceptYears } = MY_SERVICES;

@@ -26,8 +26,10 @@ const MY_SERVICES = {
   deleteProject: async (projectId) => {
     return await service.delete(`/projects/${projectId}`);
   },
-  getAllConcepts: async (projectId) => {
-    return await service.get(`/concepts/${projectId}`);
+  getAllConcepts: async ({ queryKey }) => {
+    const [_key, { projectId }] = queryKey;
+    const concepts = await service.get(`/concepts/${projectId}`);
+    return concepts.data.concepts;
   },
   createConcept: async (projectId, concept) => {
     return await service.post(`/concepts/${projectId}`, concept);
@@ -41,8 +43,10 @@ const MY_SERVICES = {
   createSubaccount: async (subaccount, projectId) => {
     return await service.post(`/subaccounts/${projectId}`, subaccount);
   },
-  getSubaccounts: async (projectId) => {
-    return await service.get(`/subaccounts/${projectId}`);
+  getSubaccounts: async ({ queryKey }) => {
+    const [_key, { projectId }] = queryKey;
+    const data = await service.get(`/subaccounts/${projectId}`);
+    return data.data.subaccounts;
   },
   deleteSubaccount: async (subaccountId) => {
     return await service.delete(`/subaccounts/${subaccountId}`);
