@@ -61,6 +61,15 @@ h1 {
   margin: 5px;
 }
 
+input {
+  padding: 5px;
+  border: 1px solid black;
+}
+
+::placeholder {
+  color: black;
+}
+
 /* End General */
 
 /* Start Landing */

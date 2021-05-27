@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from "react-select";
 
 function ConceptForm({ subaccountItems, addConcept }) {
   const internalDate = new Date();
@@ -8,6 +9,52 @@ function ConceptForm({ subaccountItems, addConcept }) {
     description: "",
     amount: null,
   });
+
+  const options = [
+    {
+      label: "Colours",
+      options: [
+        { value: "blue", label: "Blue", color: "#0052CC" },
+        { value: "yellow", label: "Yellow", color: "#FFC400" },
+      ],
+    },
+    {
+      label: "Flavours",
+      options: [
+        { value: "vanilla", label: "Vanilla", rating: "safe" },
+        { value: "chocolate", label: "Chocolate", rating: "good" },
+      ],
+    },
+  ];
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: state.isFocused ? "1px solid black" : "1px solid black",
+      borderRadius: "none",
+      // This line disable the blue border
+      // boxShadow: state.isFocused ? 0 : 0,
+      "&:hover": {
+        border: state.isFocused ? "1px solid black" : "1px solid black",
+      },
+    }),
+    placeholder: (provided, state) => ({
+      ...provided,
+      color: "black",
+    }),
+    dropdownIndicator: (provided, state) => ({
+      ...provided,
+      color: "black",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected
+        ? "black"
+        : state.isFocused
+        ? "lightgrey"
+        : "white",
+    }),
+  };
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -52,12 +99,7 @@ function ConceptForm({ subaccountItems, addConcept }) {
             style={{ width: "70%", margin: "0px 0px 0px 5px" }}
           >
             <label>Subaccount</label>
-            <input name="subaccount" list="brow" onChange={handleChange} />
-            <datalist id="brow">
-              {subaccountItems.map((subaccount) => (
-                <option value={subaccount.name} />
-              ))}
-            </datalist>
+            <Select styles={customStyles} options={options} />
           </div>
         </div>
         <div className="conceptForm">
