@@ -12,6 +12,8 @@ import Ledger from "./pages/Ledger";
 import Subaccounts from "./pages/Subaccounts";
 import Brief from "./pages/Brief";
 import Profile from "./pages/Profile";
+import Budget from "./pages/Budget";
+import KPIs from "./pages/KPIs";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const router = () => (
           <Route component={Ledger} path="/ledger" exact />
           <Route component={Subaccounts} path="/subaccounts" exact />
           <Route component={Profile} path="/profile" exact />
+          <Route component={KPIs} path="/kpis" exact />
+          <Route component={Budget} path="/budget" exact />
         </DashboardLayout>
       </Switch>
     </Router>

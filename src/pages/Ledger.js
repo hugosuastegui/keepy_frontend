@@ -7,7 +7,7 @@ import ConceptForm from "../components/ConceptForm";
 
 import MY_SERVICES from "../services/index";
 
-const { getAllConcepts, getSubaccounts, createConcept } = MY_SERVICES;
+const { getAllConcepts, getCataloguedSubaccounts, createConcept } = MY_SERVICES;
 
 function Ledger({ history }) {
   const { project, user } = useContext(Context);
@@ -22,7 +22,7 @@ function Ledger({ history }) {
 
   const { data: subaccountItems, status: subaccountItemsStatus } = useQuery(
     ["subaccounts", { projectId }],
-    getSubaccounts
+    getCataloguedSubaccounts
   );
 
   const addConcept = (newConcept) => {
@@ -37,8 +37,9 @@ function Ledger({ history }) {
     history.push("/ledger");
   };
 
-  const deleteConcept = (concept) => {
-    console.log(`Delete concept with Id: ${concept.description}`);
+  const deleteConcept = (index) => {
+    const newArr = newConcepts.filter((el, ind) => ind !== index);
+    setNewConcepts(newArr);
   };
 
   return user ? (
@@ -67,19 +68,41 @@ function Ledger({ history }) {
             <p>{subaccountItemsStatus}</p>
           ) : (
             <ConceptForm
+              projectId={projectId}
               subaccountItems={subaccountItems}
               addConcept={addConcept}
             />
           )}
           <br />
         </div>
-        <div>{/* <ConceptForm subaccountItems={subaccountItems} /> */}</div>
-        <div className="tablePanel">
-          {conceptsStatus !== "success" ? (
-            <p>{conceptsStatus}</p>
-          ) : (
-            <ConceptTable concepts={concepts} deleteAction={deleteConcept} />
-          )}
+        {newConcepts.length !== 0 ? (
+          <div>
+            <h3>Items to be added...</h3>
+            <div className="tablePanel">
+              <ConceptTable
+                concepts={newConcepts}
+                deleteAction={deleteConcept}
+                deleteColumn={true}
+              />
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        <br />
+        <div>
+          <h3>On Ledger</h3>
+          <div className="tablePanel">
+            {conceptsStatus !== "success" ? (
+              <p>{conceptsStatus}</p>
+            ) : (
+              <ConceptTable
+                concepts={concepts}
+                deleteAction={deleteConcept}
+                deleteColumn={false}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

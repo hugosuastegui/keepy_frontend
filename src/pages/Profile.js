@@ -15,7 +15,6 @@ function Profile() {
         In the near future you will be able to manage who has the permisson to
         edit the information of the projects you choose to hand on
       </p>
-      <ConceptForm subaccountItems={subaccountItems} />
     </div>
   ) : (
     <Redirect to="/"></Redirect>

@@ -1,31 +1,15 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-function ConceptForm({ subaccountItems, addConcept }) {
+function ConceptForm({ projectId, subaccountItems, addConcept }) {
   const internalDate = new Date();
   const [form, setForm] = useState({
-    subaccount: "",
+    subaccount: null,
     date: internalDate,
-    description: "",
+    description: null,
     amount: null,
   });
-
-  const options = [
-    {
-      label: "Colours",
-      options: [
-        { value: "blue", label: "Blue", color: "#0052CC" },
-        { value: "yellow", label: "Yellow", color: "#FFC400" },
-      ],
-    },
-    {
-      label: "Flavours",
-      options: [
-        { value: "vanilla", label: "Vanilla", rating: "safe" },
-        { value: "chocolate", label: "Chocolate", rating: "good" },
-      ],
-    },
-  ];
+  const [errorMessage, setErrorMessage] = useState("");
 
   const customStyles = {
     control: (provided, state) => ({
@@ -64,20 +48,37 @@ function ConceptForm({ subaccountItems, addConcept }) {
     });
   };
 
+  const handleChangeSelect = (event) => {
+    setForm({
+      ...form,
+      subaccount: event.value,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newDate = new Date(form.date);
-    newDate.setDate(newDate.getDate() + 1);
-    const newConcept = {
-      description: form.description,
-      day: newDate.toLocaleString("default", { day: "2-digit" }),
-      month: newDate.toLocaleString("default", { month: "short" }),
-      year: newDate.toLocaleString("default", { year: "numeric" }),
-      amount: parseInt(form.amount, 10),
-      subaccount: { name: form.subaccount },
-    };
-    console.log(newConcept);
-    addConcept(newConcept);
+    if (
+      form.subaccount === null ||
+      form.description === null ||
+      form.amount === null
+    ) {
+      console.log("Inside form message");
+      setErrorMessage("All fields are mandatory");
+      return;
+    } else {
+      const newDate = new Date(form.date);
+      newDate.setDate(newDate.getDate() + 1);
+      const newConcept = {
+        description: form.description,
+        day: newDate.toLocaleString("default", { day: "2-digit" }),
+        month: newDate.toLocaleString("default", { month: "short" }),
+        year: newDate.toLocaleString("default", { year: "numeric" }),
+        amount: parseInt(form.amount, 10),
+        subaccount: { name: form.subaccount },
+      };
+      addConcept(newConcept);
+      setErrorMessage(null);
+    }
   };
 
   return (
@@ -99,7 +100,11 @@ function ConceptForm({ subaccountItems, addConcept }) {
             style={{ width: "70%", margin: "0px 0px 0px 5px" }}
           >
             <label>Subaccount</label>
-            <Select styles={customStyles} options={options} />
+            <Select
+              styles={customStyles}
+              options={subaccountItems}
+              onChange={handleChangeSelect}
+            />
           </div>
         </div>
         <div className="conceptForm">
@@ -126,9 +131,12 @@ function ConceptForm({ subaccountItems, addConcept }) {
             />
           </div>
         </div>
-        <button type="button" onClick={handleSubmit}>
-          Submit
-        </button>
+        <div className="actions-messages">
+          <button type="button" onClick={handleSubmit}>
+            Submit
+          </button>
+          <div className="errorMessage">{errorMessage}</div>
+        </div>
       </form>
     </div>
   );

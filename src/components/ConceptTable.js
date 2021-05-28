@@ -1,7 +1,7 @@
 import React from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 
-function ConceptTable({ concepts, deleteAction }) {
+function ConceptTable({ concepts, deleteAction, deleteColumn }) {
   const accum = subtotal(concepts, "amount");
   const balancedConcepts = concepts.map((el, ind) => ({
     ...el,
@@ -25,11 +25,11 @@ function ConceptTable({ concepts, deleteAction }) {
           <th>Description</th>
           <th>Amount</th>
           <th>Balance</th>
-          <th>Delete</th>
+          {deleteColumn && <th>Delete</th>}
         </tr>
       </thead>
       <tbody>
-        {balancedConcepts.reverse().map((concept, ind) => (
+        {balancedConcepts.map((concept, ind) => (
           <tr key={ind}>
             <td className="headcol sticky">{concept.subaccount.name}</td>
             <td>{concept.day}</td>
@@ -38,11 +38,13 @@ function ConceptTable({ concepts, deleteAction }) {
             <td>{concept.description}</td>
             <td>{formatter.format(concept.amount)}</td>
             <td>{formatter.format(concept.balance)}</td>
-            <td>
-              <button onClick={() => deleteAction(concept)}>
-                <DeleteOutlined />
-              </button>
-            </td>
+            {deleteColumn && (
+              <td>
+                <button onClick={() => deleteAction(ind)}>
+                  <DeleteOutlined />
+                </button>
+              </td>
+            )}
           </tr>
         ))}
       </tbody>

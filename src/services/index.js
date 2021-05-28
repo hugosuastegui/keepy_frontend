@@ -43,10 +43,8 @@ const MY_SERVICES = {
   createSubaccount: async (subaccount, projectId) => {
     return await service.post(`/subaccounts/${projectId}`, subaccount);
   },
-  getSubaccounts: async ({ queryKey }) => {
-    const [_key, { projectId }] = queryKey;
-    const data = await service.get(`/subaccounts/${projectId}`);
-    return data.data.subaccounts;
+  getSubaccounts: async (projectId) => {
+    return await service.get(`/subaccounts/${projectId}`);
   },
   deleteSubaccount: async (subaccountId) => {
     return await service.delete(`/subaccounts/${subaccountId}`);
@@ -63,6 +61,13 @@ const MY_SERVICES = {
     const [_key, { projectId }] = queryKey;
     const data = await service.get(`/brief/${projectId}/years`);
     return data.data.years;
+  },
+  getCataloguedSubaccounts: async ({ queryKey }) => {
+    const [_key, { projectId }] = queryKey;
+    const data = await service.get(
+      `/helpers/catalogued-subaccounts/${projectId}`
+    );
+    return data.data.catSubaccounts;
   },
 };
 
