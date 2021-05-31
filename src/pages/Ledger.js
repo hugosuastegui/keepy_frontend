@@ -20,10 +20,11 @@ function Ledger({ history }) {
     getAllConcepts
   );
 
-  const { data: subaccountItems, status: subaccountItemsStatus } = useQuery(
-    ["subaccounts", { projectId }],
-    getCataloguedSubaccounts
-  );
+  const {
+    data: subaccountItems,
+    status: subaccountItemsStatus,
+    refetch,
+  } = useQuery(["subaccounts", { projectId }], getCataloguedSubaccounts);
 
   const addConcept = (newConcept) => {
     setNewConcepts([...newConcepts, newConcept]);
@@ -34,7 +35,7 @@ function Ledger({ history }) {
       await createConcept(project._id, array[i]);
     }
     setNewConcepts([]);
-    history.push("/ledger");
+    refetch();
   };
 
   const deleteConcept = (index) => {

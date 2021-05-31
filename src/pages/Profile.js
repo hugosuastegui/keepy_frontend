@@ -1,9 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../context";
 import { Redirect } from "react-router-dom";
-import ConceptForm from "../components/ConceptForm";
-
-const subaccountItems = ["first", "second", "third", "forth", "fifth"];
 
 function Profile() {
   const { user } = useContext(Context);

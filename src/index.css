@@ -18,6 +18,7 @@ h1 {
   font-family: "Courier New", Courier, monospace;
   padding: 3% 160px 3% 320px;
   background-color: lightgray;
+  min-height: 100vh;
 }
 
 .primaryButton {
@@ -64,6 +65,11 @@ h1 {
 
 input {
   padding: 5px;
+  border: 1px solid black;
+}
+
+select {
+  padding: 10px;
   border: 1px solid black;
 }
 
@@ -208,7 +214,7 @@ input {
     display: inline;
   }
   .main {
-    margin: 70px 20px 0px 20px;
+    padding: 70px 20px 0px 20px;
   }
 }
 
@@ -396,7 +402,8 @@ input {
 }
 
 .subaccountsDescription {
-  font-size: small;
+  font-size: medium;
+  text-align: center;
 }
 
 .subaccountsRow {
@@ -462,6 +469,8 @@ table td {
   text-align: center;
 }
 
+/* End Legder */
+
 /* Concept Form */
 
 .conceptFormContainer {
@@ -500,4 +509,65 @@ table td {
   justify-content: space-between;
   align-items: center;
 }
-/* End Legder */
+
+@media screen and (max-width: 700px) {
+  .conceptForm {
+    flex-direction: column;
+  }
+  .conceptField {
+    width: 100% !important;
+    margin: 0px !important;
+  }
+  .actions-messages {
+    display: block;
+  }
+  .conceptFormContainer > form > .actions-messages > button {
+    width: 100%;
+  }
+}
+
+/* End Concept Form */
+
+/* Start Subaccount Form */
+
+.subaccountFormContainer {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  font-size: medium;
+  padding: 10px;
+  margin: 20px;
+}
+
+.subaccountForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.subaccountField {
+  display: flex;
+  flex-direction: column;
+}
+
+.subaccountFormContainer > form > div > button {
+  margin-top: 5px;
+  background-color: black;
+  color: white;
+}
+
+/* End Subaccount Form */
+
+/* Start Subaccount Table */
+.subaccountTable {
+  font-size: small;
+  max-height: 200px;
+  margin: 0;
+}
+.singleTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* End Subaccount Table */

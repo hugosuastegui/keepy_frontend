@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import NumberFormat from "react-number-format";
 
 function ConceptForm({ projectId, subaccountItems, addConcept }) {
   const internalDate = new Date();
@@ -7,7 +8,7 @@ function ConceptForm({ projectId, subaccountItems, addConcept }) {
     subaccount: null,
     date: internalDate,
     description: null,
-    amount: null,
+    amount: 0,
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -55,6 +56,13 @@ function ConceptForm({ projectId, subaccountItems, addConcept }) {
     });
   };
 
+  const handleChangeAmount = (value) => {
+    setForm({
+      ...form,
+      amount: value,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (
@@ -62,7 +70,6 @@ function ConceptForm({ projectId, subaccountItems, addConcept }) {
       form.description === null ||
       form.amount === null
     ) {
-      console.log("Inside form message");
       setErrorMessage("All fields are mandatory");
       return;
     } else {
@@ -122,12 +129,19 @@ function ConceptForm({ projectId, subaccountItems, addConcept }) {
           </div>
           <div className="conceptField" style={{ width: "auto" }}>
             <label>Amount</label>
-            <input
-              type="number"
+
+            <NumberFormat
               name="amount"
-              style={{ width: "100px" }}
-              onChange={handleChange}
-              placeholder="Amount"
+              thousandSeparator={true}
+              prefix={"$"}
+              allowNegative={false}
+              allowLeadingZeros={false}
+              decimalScale={2}
+              placeholder={"$0.00"}
+              onValueChange={(values) => {
+                const { formattedValue, value } = values;
+                handleChangeAmount(value);
+              }}
             />
           </div>
         </div>

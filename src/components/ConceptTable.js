@@ -15,40 +15,42 @@ function ConceptTable({ concepts, deleteAction, deleteColumn }) {
   });
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th className="sticky">Subaccount</th>
-          <th>Day</th>
-          <th>Month</th>
-          <th>Year</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>Balance</th>
-          {deleteColumn && <th>Delete</th>}
-        </tr>
-      </thead>
-      <tbody>
-        {balancedConcepts.map((concept, ind) => (
-          <tr key={ind}>
-            <td className="headcol sticky">{concept.subaccount.name}</td>
-            <td>{concept.day}</td>
-            <td>{concept.month}</td>
-            <td>{concept.year}</td>
-            <td>{concept.description}</td>
-            <td>{formatter.format(concept.amount)}</td>
-            <td>{formatter.format(concept.balance)}</td>
-            {deleteColumn && (
-              <td>
-                <button onClick={() => deleteAction(ind)}>
-                  <DeleteOutlined />
-                </button>
-              </td>
-            )}
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th className="sticky">Subaccount</th>
+            <th>Day</th>
+            <th>Month</th>
+            <th>Year</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Balance</th>
+            {deleteColumn && <th>Delete</th>}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {balancedConcepts.map((concept, ind) => (
+            <tr key={ind}>
+              <td className="headcol sticky">{concept.subaccount.name}</td>
+              <td>{concept.day}</td>
+              <td>{concept.month}</td>
+              <td>{concept.year}</td>
+              <td>{concept.description}</td>
+              <td>{formatter.format(concept.amount)}</td>
+              <td>{formatter.format(concept.balance)}</td>
+              {deleteColumn && (
+                <td>
+                  <button onClick={() => deleteAction(ind)}>
+                    <DeleteOutlined />
+                  </button>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
