@@ -69,6 +69,14 @@ const MY_SERVICES = {
     );
     return data.data.catSubaccounts;
   },
+  getAllKpis: async ({ queryKey }) => {
+    const [_key, { projectId }] = queryKey;
+    const data = await service.get(`/kpis/${projectId}`);
+    return data.data.kpis;
+  },
+  createKpi: async ({ kpi, projectId }) => {
+    return await service.post(`/kpis/${projectId}`, kpi);
+  },
 };
 
 export default MY_SERVICES;

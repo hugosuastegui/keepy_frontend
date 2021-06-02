@@ -28,7 +28,7 @@ function Subaccounts({ history }) {
   return user ? (
     <div className="subaccountsPage">
       <h1>Subaccounts</h1>
-      <p className="subaccountsDescription">
+      <p className="pageIntro">
         Subaccounts are ways to classify concepts by type. Ever wondered how
         much money does an item accounts for in your total Revenue? Create a
         Subaccount for that item so you can handle its metrics on the Brief

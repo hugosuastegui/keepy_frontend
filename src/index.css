@@ -64,7 +64,7 @@ h1 {
 }
 
 input {
-  padding: 5px;
+  padding: 6px;
   border: 1px solid black;
 }
 
@@ -401,7 +401,7 @@ select {
   align-items: center;
 }
 
-.subaccountsDescription {
+.pageIntro {
   font-size: medium;
   text-align: center;
 }
@@ -571,3 +571,66 @@ table td {
 }
 
 /* End Subaccount Table */
+
+/* Start KPIs Page */
+.kpiPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radioButtons {
+  margin: 5px 0 5px 0;
+}
+.radioButtons > label {
+  padding: 2px;
+  margin: 5px;
+}
+
+.radioButtons > input {
+  padding: 2px;
+  margin-left: 5px;
+}
+
+.formButton {
+  margin-top: 5px;
+  background-color: black;
+  color: white;
+}
+
+.kpiTable {
+  font-size: small;
+  width: 100%;
+  max-height: 200px;
+}
+
+/* End KPIs Page */
+
+/* Start Budget Page */
+.budgetPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.budgetSubaccount {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.budgetSubaccount > label {
+  width: 40%;
+}
+
+.budgetSubaccount > input {
+  width: 30%;
+}
+
+.subaccountFormContainer > form > button {
+  margin-top: 10px;
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+/* End Budget Page */
